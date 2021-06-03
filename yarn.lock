@@ -2191,6 +2191,18 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@splidejs/react-splide@^0.4.4":
+  "integrity" "sha512-o3WYE7Dt0Kzx9tRM7mnYW2QN+uajJPwIQ2fN0DoYs4hKql+pjwuA18M6u3iy39Rc8nVUk+m1Utn2XgfmX07rNQ=="
+  "resolved" "https://registry.npmjs.org/@splidejs/react-splide/-/react-splide-0.4.4.tgz"
+  "version" "0.4.4"
+  dependencies:
+    "@splidejs/splide" "^2.4.13"
+
+"@splidejs/splide@^2.4.13", "@splidejs/splide@^2.4.21":
+  "integrity" "sha512-LdIwSnmNsGybCCnA3QG2dOeRv/rQl46jf7FflXxMGX0ADYWyL6UJHWJbMZvHBi5I67uRJY1ga/W+CvJ39nH26A=="
+  "resolved" "https://registry.npmjs.org/@splidejs/splide/-/splide-2.4.21.tgz"
+  "version" "2.4.21"
+
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   "integrity" "sha512-yBMPqmd1yEJo/280PAMkychuaALyQ9Lkb5q1ck3mjJrFuEobIfhnQ4J3mbvBoISmR3SWMWV+cGB/I0lCQee79A=="
   "resolved" "https://registry.yarnpkg.com/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-1.4.2.tgz"
@@ -9994,7 +10006,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^16.8.0 || 17.x", "react-dom@^17.0.2", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8.6":
+"react-dom@*", "react-dom@^16.8.0 || 17.x", "react-dom@^17.0.2", "react-dom@>=16.8 || ^17.0.0", "react-dom@>=16.8.6", "react-dom@16.13.1":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -10024,6 +10036,11 @@
     "react-clientside-effect" "^1.2.2"
     "use-callback-ref" "^1.2.1"
     "use-sidecar" "^1.0.1"
+
+"react-icons@^4.2.0":
+  "integrity" "sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.2.0.tgz"
+  "version" "4.2.0"
 
 "react-is@^16.7.0", "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
@@ -10134,7 +10151,7 @@
     "invariant" "^2.2.4"
     "tslib" "^1.0.0"
 
-"react@*", "react@^15.3.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>= 16", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@>=16.8.6", "react@17.0.2":
+"react@*", "react@^15.3.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>= 16", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@>=16.8.6", "react@16.13.1", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
