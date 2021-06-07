@@ -1,6 +1,6 @@
 import { Img } from '@chakra-ui/image'
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
-import { Box, Flex, HStack, Text } from '@chakra-ui/layout'
+import {Flex, HStack, Text } from '@chakra-ui/layout'
 import React from 'react'
 import {FaSearch} from "react-icons/fa"
 
@@ -21,7 +21,7 @@ function NavbarMain() {
                         pointerEvents="none" width="72px"  borderRadius="0 10px 10px 0"
                         children={<FaSearch color="black" />}
                     />
-                    <Input border="2px solid" borderColor="brand.primary" borderRadius="10px" backgroundColor="brand.white" type="tel" placeholder="Busca tu película favorita" />
+                    <Input color="brand.black" border="2px solid" borderColor="brand.primary" borderRadius="10px" backgroundColor="brand.white" type="tel" placeholder="Busca tu película favorita" />
                 </InputGroup>
             </HStack>
         </Flex>
