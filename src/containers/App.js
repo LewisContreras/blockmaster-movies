@@ -1,22 +1,20 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import CardsContainer from '../components/CardsContainer';
-// import EachMovieCard from '../components/EachMovieCard';
-// import ModalEachMovie from '../components/ModalEachMovie';
-// import NothingFound from '../components/NothingFound';
-// import SliderMain from '../components/SliderMain';
+import { store } from '../store/store';
+import { Provider } from 'react-redux';
+
 import theme from "../styles/theme"
-import NavbarMain from '../components/NavbarMain';
+import { AppRouter } from '../routers/AppRouter';
+
+
+
 
 function App() {
   return (
-    <ChakraProvider theme={theme} >
-      <NavbarMain/>
-      {/* <SliderMain/> */}
-      {/* <NothingFound/> */}
-      {/* <EachMovieCard/> */}
-      <CardsContainer/>
-      {/* <ModalEachMovie/> */}
+    <Provider store={store} >
+      <ChakraProvider theme={theme} >
+        <AppRouter/>
     </ChakraProvider>
+    </Provider>
   );
 }
 
