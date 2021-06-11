@@ -13,7 +13,6 @@ import {PrivateRoute} from "./PrivateRoute"
 import {PublicRoute} from "./PublicRoute"
 import MainScreen from '../containers/MainScreen';
 
-
 export const AppRouter = () => {
 
     const [checking, setChecking] = useState(true)
@@ -21,7 +20,12 @@ export const AppRouter = () => {
     
     const dispatch = useDispatch()
 
+  
+
+    
+
     useEffect(() => {
+
         firebase.auth().onAuthStateChanged(async(user)=>{
             console.log(user);
 

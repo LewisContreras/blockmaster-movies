@@ -10,8 +10,7 @@ Agrega un scroll infinito o paginación al ver toda la colección de películas,
 
 Requerimientos
 
-- Añadir el buscador
-- Añadir descripción de cada película
+
 - Añadir video Tráiler de 5 películas
 - Módulo CRUD de películas (Crear, Leer, Actualizar y Eliminar) 
 - Conectar API de videos
@@ -22,3 +21,5 @@ Realizados:
 - Accesibilidad como prioridad
 - Sube tu código a GitHub
 - Publica tu resultado con github pages
+- Añadir descripción de cada película
+- Añadir el buscador
