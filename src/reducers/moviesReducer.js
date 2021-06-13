@@ -4,7 +4,8 @@ import { types } from "../types/types";
  const initialState = {
     search:"Todas",
     selected:[],
-    modal: null
+    modal: null,
+    last : null
 } 
 
 export const moviesReducer = (state = initialState , action) => {
@@ -25,6 +26,12 @@ export const moviesReducer = (state = initialState , action) => {
             return {
                 ...state,
                 modal: action.payload
+            }
+        
+        case types.mvLastDoc:
+            return {
+                ...state,
+                last: action.payload
             }
 
         default:

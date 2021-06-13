@@ -10,5 +10,6 @@ export const types = {
 
     mvSelected: "[MV] movie selected",
     mvSearch: "[MV] movie to search",
-    mvModal: "[MV] movie modal"
+    mvModal: "[MV] movie modal",
+    mvLastDoc : "[MV] last query movie"
 }

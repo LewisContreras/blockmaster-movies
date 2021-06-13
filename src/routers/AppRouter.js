@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import {PrivateRoute} from "./PrivateRoute"
 import {PublicRoute} from "./PublicRoute"
 import MainScreen from '../containers/MainScreen';
+import Crud from '../containers/Crud';
 
 export const AppRouter = () => {
 
@@ -63,6 +64,13 @@ export const AppRouter = () => {
                         exact
                         path="/"
                         component={ MainScreen }
+                        isAuthenticated={isLoggedIn}
+                    />
+
+                    <PrivateRoute 
+                        exact
+                        path="/crud"
+                        component={ Crud }
                         isAuthenticated={isLoggedIn}
                     />
 

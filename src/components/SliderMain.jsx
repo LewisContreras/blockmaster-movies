@@ -14,39 +14,58 @@ SwiperCore.use([Navigation, Pagination])
 
 function SliderMain() {
     return (
-        <Box px="20px" mt="120px">
+        <Box   px="20px" mt="120px">
             <Swiper
         spaceBetween={8}
-        navigation pagination
+        navigation pagination 
         >
           <SwiperSlide>
-              <Box position="relative">
-                  <Img maxWidth="100%" height="100%" src="https://i.imgur.com/HjNNUVp.png" />
+              <Box  position="relative">
+                  <Img borderRadius="10px" maxWidth="100%" height="100%" src="https://i.imgur.com/HjNNUVp.png" />
                   <HStack position="absolute" bottom="20px" left="20px">
                     <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
-                    <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button>
+                    {/* <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button> */}
                   </HStack>
               </Box>
         </SwiperSlide>
         <SwiperSlide>
         <Box position="relative">
-                  <Img maxWidth="100%" height="100%" src="https://i.imgur.com/HjNNUVp.png" />
+                  <Img borderRadius="10px" maxWidth="100%" height="100%" src="https://i.imgur.com/WmJVBQB.png" />
                   <HStack position="absolute" bottom="20px" left="20px">
                     <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
-                    <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button>
+                    {/* <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button> */}
                   </HStack>
               </Box>
               
         </SwiperSlide>
         <SwiperSlide>
         <Box position="relative">
-                  <Img maxWidth="100%" height="100%" src="https://i.imgur.com/HjNNUVp.png" />
+                  <Img borderRadius="10px" maxWidth="100%" height="100%" src="https://i.imgur.com/tmGy9lQ.png" />
                   <HStack position="absolute" bottom="20px" left="20px">
                     <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
-                    <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button>
+                    {/* <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button> */}
                   </HStack>
               </Box>
-        </SwiperSlide>      
+        </SwiperSlide>
+        <SwiperSlide>
+        <Box height="310px" position="relative">
+                  <Img borderRadius="10px" width="100%" height="100%" src="https://i.imgur.com/zytsah1.jpeg" />
+                  <HStack position="absolute" bottom="20px" left="20px">
+                    <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
+                    {/* <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button> */}
+                  </HStack>
+              </Box>
+        </SwiperSlide>
+        <SwiperSlide>
+        <Box height="310px" position="relative">
+                  <Img borderRadius="10px" width="100%" height="100%" src="https://i.imgur.com/YnqRzkn.jpeg" />
+                  <HStack position="absolute" bottom="20px" left="20px">
+                    <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
+                    {/* <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button> */}
+                  </HStack>
+              </Box>
+        </SwiperSlide>
+              
         </Swiper>
         </Box>
       );

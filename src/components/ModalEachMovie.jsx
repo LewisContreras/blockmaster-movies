@@ -24,7 +24,7 @@ function ModalEachMovie() {
                 <VStack alignItems="start" >
                     <Text>{modal.nameMovie}</Text>
                     <Text>{modal.description}</Text>
-                    <Text>{`${modal.year} * ${modal.genre} * ${modal.duration}`}</Text>
+                    <Text>{`${modal.year} * ${modal.genre} * ${Math.floor(modal.duration/60)}h ${modal.duration%60}min`}</Text>
                     <HStack >
                         <Button leftIcon={<FaPlay/>} color="brand.black" bgColor="brand.primary"  >VER AHORA</Button>
                         <Button leftIcon={<FaPlus/>} border="2px solid" borderColor="brand.primary" color="brand.primary" bgColor="brand.background" >VER DESPUÉS</Button>

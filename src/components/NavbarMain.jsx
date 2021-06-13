@@ -8,7 +8,7 @@ import { useRef } from 'react'
 import {FaSearch, FaUser} from "react-icons/fa"
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../actions/auth'
-import {movieSearch, startMovieSelected} from "../actions/moviesActions"
+import {movieLastDoc, movieSearch, startMovieSelected} from "../actions/moviesActions"
 
 function NavbarMain() {
     const inputRef = useRef("")
@@ -26,6 +26,7 @@ function NavbarMain() {
 
     const handleClickCategories = (e) =>{
         let contenido = e.target.textContent
+        dispatch(movieLastDoc(null))
         dispatch(movieSearch(contenido))
         dispatch(startMovieSelected(contenido))
         let navCategories = document.querySelectorAll(".nav-category")
@@ -40,6 +41,8 @@ function NavbarMain() {
 
     const handleSearch = (e) =>{
         let valueInput = inputRef.current.value
+        dispatch(movieLastDoc(null))
+        dispatch(movieSearch(valueInput))
         dispatch(startMovieSelected(valueInput))
         let navCategories = document.querySelectorAll(".nav-category")
         for (let i of navCategories) {
@@ -56,7 +59,7 @@ function NavbarMain() {
                 <Img src="https://i.imgur.com/pwIYVhf.png" />
 
                 <HStack minWidth="400px" spacing={10}>
-                    <Text color="yellow" id="puta-mierda" className="nav-category" onClick={handleClickCategories} cursor="pointer">Todas</Text>
+                    <Text color="yellow" className="nav-category" onClick={handleClickCategories} cursor="pointer">Todas</Text>
                     <Text className="nav-category" onClick={handleClickCategories} cursor="pointer" >Más valoradas</Text>
                     <Text className="nav-category" onClick={handleClickCategories} cursor="pointer" >Menos valoradas</Text>
                 </HStack>
