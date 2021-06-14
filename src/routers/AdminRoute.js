@@ -21,6 +21,5 @@ export const AdminRoute = ({
 }
 AdminRoute.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    component: PropTypes.func.isRequired,
-    uid: PropTypes.string.isRequired
+    component: PropTypes.func.isRequired
 }

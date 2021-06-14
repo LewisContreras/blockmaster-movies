@@ -1,5 +1,5 @@
 import { Box, Button, Center, FormControl, FormLabel, HStack, Icon, Img, Input, Text, Textarea, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { MdClose, MdUpdate } from 'react-icons/md'
 import { db } from '../../firebase/firebase-config'
 import {useSelector, useDispatch} from "react-redux"
@@ -15,19 +15,6 @@ const CardsCrud = () => {
     const [change, setChange] = useState(true)
     const searchCrud = useSelector(state => state.crud.search)
     const dispatch = useDispatch()
-
-
-    // const auth = async ( )=>{
-        
-    //     const apiKey = "dvifpaPG0mjH0GVByWcxhy0nfltmawPpodjgF9g4s6F"
-    //     const objectKey ={
-    //         "apiKey": apiKey
-    //     }
-    //     const videoId = "vi4WYBRq0TLtekerHex0dURh"        
-    //     let resp = await axios.post(`https://sandbox.api.video/auth/api-key`,objectKey)
-    //     let resp = await axios.get(`https://ws.api.video/videos/${videoId}`)
-    //     console.log(resp);
-    // }
 
 
     const handleDelete = async (movie)=>{

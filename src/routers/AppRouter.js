@@ -3,7 +3,6 @@ import firebase from "firebase"
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect
   } from 'react-router-dom';
 import { login } from "../actions/auth"

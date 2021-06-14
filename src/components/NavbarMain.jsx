@@ -2,7 +2,7 @@ import Icon from '@chakra-ui/icon'
 import { Img } from '@chakra-ui/image'
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
 import {Flex, HStack, Text } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 import {FaSearch} from "react-icons/fa"
@@ -17,21 +17,47 @@ function NavbarMain() {
     const dispatch = useDispatch()
     const uid = useSelector(state => state.auth.uid)
     const search = useSelector(state => state.movies.search)
+    const [loading, setLoading] = useState(false)
+    const mounted = useRef(false)
+
+    const handleScroll = (e)=>{
+        let scrollTop = document.scrollingElement.scrollTop
+        let scrollHeight = document.scrollingElement.scrollHeight
+        let viewport = document.scrollingElement.clientHeight
+        if(scrollTop + viewport + 0.5 > scrollHeight  ){
+            setLoading(true)
+        }
+    }
 
     useEffect(() => {
-        dispatch(movieSearch(search))
-        dispatch(startMovieSelected(search))
-    }, [])
-
-    const handleLogout = ()=>{
-        dispatch(startLogout())
-    }
+        window.addEventListener("scroll", handleScroll)
+        if(loading && search === "Todas"){
+            dispatch(startMovieSelected(search))
+            
+        }
+        if(!mounted.current){
+            let navCategories = document.querySelectorAll(".nav-category")
+            for (let i of navCategories) {
+                if (i.textContent === search) {
+                    i.style.color = "#FED941"
+                    i.style.borderBottom ="2px solid #FED941"
+                }
+            }
+            dispatch(movieSearch(search))
+            dispatch(startMovieSelected(search))
+            mounted.current = true
+        }
+        return ()=>{
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [loading,dispatch])
 
     const handleClickCategories = (e) =>{
         let contenido = e.target.textContent
         dispatch(movieLastDoc(null))
         dispatch(movieSearch(contenido))
         dispatch(startMovieSelected(contenido))
+        setLoading(false)
         window.scrollTo({
             top:320,
             behavior: "smooth"
@@ -39,18 +65,21 @@ function NavbarMain() {
         let navCategories = document.querySelectorAll(".nav-category")
         for (let i of navCategories) {
             if (i.textContent === e.target.textContent) {
-                i.style.color = "yellow"
+                i.style.color = "#FED941"
+                i.style.borderBottom ="2px solid #FED941"
             }else{
                 i.style.color = "white"
+                i.style.border ="none"
             }
         }
     }
 
-    const handleSearch = (e) =>{
+    const handleSearch = () =>{
         let valueInput = inputRef.current.value
         dispatch(movieLastDoc(null))
         dispatch(movieSearch(valueInput))
         dispatch(startMovieSelected(valueInput))
+        setLoading(false)
         window.scrollTo({
             top:320,
             behavior: "smooth"
@@ -58,10 +87,10 @@ function NavbarMain() {
         let navCategories = document.querySelectorAll(".nav-category")
         for (let i of navCategories) {
                 i.style.color = "white"
+                i.style.border = "none"
         }
         inputRef.current.value = ""
     }
-
 
     return (
         <Flex alignItems="center" position="fixed" top="0" zIndex="100" width="100%" h="112px" backgroundColor="brand.background">
@@ -70,9 +99,9 @@ function NavbarMain() {
                 <Img src="https://i.imgur.com/pwIYVhf.png" />
 
                 <HStack minWidth="400px" spacing={10}>
-                    <Text color="yellow" className="nav-category" onClick={handleClickCategories} cursor="pointer">Todas</Text>
-                    <Text className="nav-category" onClick={handleClickCategories} cursor="pointer" >Más valoradas</Text>
-                    <Text className="nav-category" onClick={handleClickCategories} cursor="pointer" >Menos valoradas</Text>
+                    <Text  fontWeight="600"    className="nav-category" onClick={handleClickCategories} cursor="pointer">Todas</Text>
+                    <Text className="nav-category" fontWeight="600" onClick={handleClickCategories} cursor="pointer" >Más valoradas</Text>
+                    <Text className="nav-category" fontWeight="600" onClick={handleClickCategories} cursor="pointer" >Menos valoradas</Text>
                 </HStack>
 
                 <InputGroup  >
@@ -87,7 +116,7 @@ function NavbarMain() {
                     ?<GoCrud />
                     :null
                 }
-                <Icon fontSize="30px" color="red" cursor="pointer" onClick={handleLogout} as={GiExitDoor} />
+                <Icon fontSize="30px" color="red" cursor="pointer" onClick={()=>dispatch(startLogout())} as={GiExitDoor} />
                 
             </HStack>
         </Flex>

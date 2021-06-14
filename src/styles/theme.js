@@ -1,8 +1,4 @@
 import { extendTheme } from "@chakra-ui/react";
-// import "@fontsource/nunito/800.css";
-// import "@fontsource/nunito/700.css";
-// import "@fontsource/nunito/600.css";
-// import "@fontsource/nunito/400.css";
 
 const theme = extendTheme({
     styles: {
@@ -13,10 +9,7 @@ const theme = extendTheme({
         },
       },
     },
-    // fonts: {
-    //   heading: "Nunito",
-    //   body: "Nunito",
-    // },
+ 
     colors: {
       brand: {
         primary: "#FED941",

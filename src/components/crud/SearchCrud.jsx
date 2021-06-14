@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { crudSearch } from '../../actions/crudActions'
 import { db } from '../../firebase/firebase-config'
-import { FaArrowLeft, FaHome } from 'react-icons/fa'
+import { FaHome } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 
 const SearchCrud = () => {
@@ -16,7 +16,7 @@ const SearchCrud = () => {
         e.preventDefault()
         let searched = e.target.firstElementChild.nextElementSibling.value.toUpperCase()
         let movieSearched = []
-        let resp = await db.collection("movies").where("nameMovie", "==",searched).get().then(snap=>{
+        await db.collection("movies").where("nameMovie", "==",searched).get().then(snap=>{
             snap.forEach(hijo=>{
                 movieSearched.push({
                     id:hijo.id,

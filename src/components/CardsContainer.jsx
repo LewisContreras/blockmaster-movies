@@ -5,7 +5,6 @@ import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { movieModal } from '../actions/moviesActions'
-import EachMovieCard from './EachMovieCard'
 import NothingFound from "./NothingFound.jsx"
 import "../styles/animations.css"
 

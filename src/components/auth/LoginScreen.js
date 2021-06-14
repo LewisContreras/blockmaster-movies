@@ -9,7 +9,7 @@ import { Center,Box } from '@chakra-ui/layout'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link as ReachLink} from "react-router-dom"
-import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
 import "../../styles/animations.css"
 
 function LoginScreen() {

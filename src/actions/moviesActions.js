@@ -9,7 +9,7 @@ export const movieSearch = (categorie) => {
 }
 
 export const startMovieSelected = (categorie) => {
-    console.log(categorie);
+
     return async (dispatch,getState) => {
         const search = getState().movies.search
         const last = getState().movies.last

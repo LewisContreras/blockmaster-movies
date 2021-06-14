@@ -2,22 +2,21 @@ import { Button } from '@chakra-ui/button'
 import { Img } from '@chakra-ui/image'
 import { Input } from '@chakra-ui/input'
 import { Link } from '@chakra-ui/layout'
-import { HStack } from '@chakra-ui/layout'
 import { VStack } from '@chakra-ui/layout'
 import { Text } from '@chakra-ui/layout'
 import { Center,Box } from '@chakra-ui/layout'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import {Link as ReachLink} from "react-router-dom"
 import validator from 'validator'
 import {useForm} from "../../hooks/useForm"
-import {setError, removeError} from "../../actions/uiActions"
+import {setError} from "../../actions/uiActions"
 import { startRegisterWithEmailPasswordName } from '../../actions/auth'
 import "../../styles/animations.css"
 
 function RegisterScreen() {
     const dispatch = useDispatch()
-    const {msjError} = useSelector(state => state.ui)
+    // const {msjError} = useSelector(state => state.ui)
 
     const [values, handleInputChange] = useForm({
         name: "",
