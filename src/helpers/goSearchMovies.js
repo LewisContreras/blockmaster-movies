@@ -9,14 +9,16 @@ export const goSearchMovies = async (category,selected,last) =>{
                     movies = []
                 }
                 let ref = await db.collection("movies").orderBy("nameMovie").startAfter(last).limit(9).get().then(snap =>{
-                    console.log(snap.docs)
+                    last = snap.docs[snap.docs.length -1].id
+                    console.log(last);
                     snap.forEach(hijo => {
                         movies.push({
                             id:hijo.id,
                             ...hijo.data()
                         })
                     });
-                    
+                    console.log(last);
+                    console.log(movies);
                 }).catch(err =>console.log(err))
 
             
@@ -63,5 +65,8 @@ export const goSearchMovies = async (category,selected,last) =>{
             }).catch(err =>
                 console.log(err))
         }
-        return movies
+        return {
+            movies: movies,
+            last:last
+        }
 }

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { movieModal } from '../actions/moviesActions'
 import EachMovieCard from './EachMovieCard'
 import NothingFound from "./NothingFound.jsx"
+import "../styles/animations.css"
 
 function CardsContainer() {
 
@@ -21,7 +22,7 @@ function CardsContainer() {
         
             !selectedMovies.length
             ?<NothingFound/>
-            :<Grid templateColumns="repeat(auto-fill,220px)" gap="10px" px="30px" mt="20px" justifyContent="space-between" >
+            :<Grid pb="70px" className="scene_element scene_element--fadeinup" templateColumns="repeat(auto-fill,220px)" gap="10px" px="30px" mt="20px" justifyContent="space-between" >
             {
                 selectedMovies.map((el, index) =><Box onClick={()=>handleClickModal(el)}
                 position="relative" backgroundPosition="center" borderRadius="10px" backgroundSize="cover" cursor="pointer" backgroundImage={el.imageUrl} w="220px" h="330px" key={index} >

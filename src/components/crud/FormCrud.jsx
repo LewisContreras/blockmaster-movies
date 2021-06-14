@@ -76,7 +76,7 @@ const FormCrud = () => {
 
     return (
         <Flex mt="20px" justifyContent="center" >
-            <Box width="400px" borderRadius="10px" p="10px" bgColor="whiteAlpha.500" >
+            <Box maxWidth="500px" mb="20px" borderRadius="10px" p="20px" bgColor="whiteAlpha.300" >
                 <Box as="form" onSubmit={(e)=>{
                     formik.handleSubmit()
                     handleReset(e)
@@ -103,7 +103,7 @@ const FormCrud = () => {
                             <Input type="file" name="duration"  onChange={handleImage} />
                             {formik.errors.imageUrl ? <Box>{formik.errors.imageUrl}</Box>:null}
                         </FormControl>
-                        <HStack spacing="20px" >
+                        <HStack alignItems="start" spacing="20px" >
                         <FormControl id="movie-year" >
                             <FormLabel>Año *</FormLabel>
                             <Input type="number" name="year" value={formik.values.year} onChange={formik.handleChange} />

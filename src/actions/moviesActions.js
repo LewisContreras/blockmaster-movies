@@ -14,9 +14,9 @@ export const startMovieSelected = (categorie) => {
         const search = getState().movies.search
         const last = getState().movies.last
         const selected = getState().movies.selected
-        const movies = await goSearchMovies(categorie,selected,last)
+        const {movies,last:lasted} = await goSearchMovies(categorie,selected,last)
 
-        dispatch(movieLastDoc(movies[movies.length-1].id || null ))
+        dispatch(movieLastDoc(lasted))
 
         dispatch(movieSelected(movies))
         

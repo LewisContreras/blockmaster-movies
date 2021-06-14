@@ -10,16 +10,18 @@ import {GiExitDoor} from "react-icons/gi"
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../actions/auth'
 import {movieLastDoc, movieSearch, startMovieSelected} from "../actions/moviesActions"
+import GoCrud from './GoCrud'
 
 function NavbarMain() {
     const inputRef = useRef("")
     const dispatch = useDispatch()
+    const uid = useSelector(state => state.auth.uid)
     const search = useSelector(state => state.movies.search)
 
-    // useEffect(() => {
-    //     dispatch(movieSearch(search))
-    //     dispatch(startMovieSelected(search))
-    // }, [])
+    useEffect(() => {
+        dispatch(movieSearch(search))
+        dispatch(startMovieSelected(search))
+    }, [])
 
     const handleLogout = ()=>{
         dispatch(startLogout())
@@ -30,6 +32,10 @@ function NavbarMain() {
         dispatch(movieLastDoc(null))
         dispatch(movieSearch(contenido))
         dispatch(startMovieSelected(contenido))
+        window.scrollTo({
+            top:320,
+            behavior: "smooth"
+        })
         let navCategories = document.querySelectorAll(".nav-category")
         for (let i of navCategories) {
             if (i.textContent === e.target.textContent) {
@@ -45,6 +51,10 @@ function NavbarMain() {
         dispatch(movieLastDoc(null))
         dispatch(movieSearch(valueInput))
         dispatch(startMovieSelected(valueInput))
+        window.scrollTo({
+            top:320,
+            behavior: "smooth"
+        })
         let navCategories = document.querySelectorAll(".nav-category")
         for (let i of navCategories) {
                 i.style.color = "white"
@@ -72,7 +82,13 @@ function NavbarMain() {
                     />
                     <Input ref={inputRef} color="brand.black" border="2px solid" borderColor="brand.primary" borderRadius="10px" backgroundColor="brand.white" type="tel" placeholder="Busca tu película favorita" />
                 </InputGroup>
+                {
+                    uid === "Th1NLjQWVLao0xs1jr0yxbMvKE23"
+                    ?<GoCrud />
+                    :null
+                }
                 <Icon fontSize="30px" color="red" cursor="pointer" onClick={handleLogout} as={GiExitDoor} />
+                
             </HStack>
         </Flex>
     )

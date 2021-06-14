@@ -10,6 +10,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link as ReachLink} from "react-router-dom"
 import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
+import "../../styles/animations.css"
 
 function LoginScreen() {
     const dispatch = useDispatch()
@@ -29,21 +30,29 @@ function LoginScreen() {
     return (
         
         <Center h="100vh" >
-            <Box borderRadius="10px" padding="14px"  w="300px" bgColor="whiteAlpha.300">
+            <Box borderRadius="10px"  p="1px"  w="350px"  bgColor="brand.primary">
+                <Center h="120px" borderRadius="10px 10px 0 0"  >
+                    <Img src="https://i.imgur.com/pwIYVhf.png" />
+                </Center>
                 <form onSubmit={handleSubmitLogin} >
-                <VStack spacing="10px">
-                <Text>Ingresa con correo y contraseña</Text>
-                <Input id="email-login" type="email" placeholder="Email" isRequired />
-                <Input id="password-login" type="password" 
+                <VStack className="scene_element scene_element--clipmidup" p="10px" h="340px" borderRadius="0 0 10px 10px" spacing="10px" bgColor="#14112e" >
+                <Text my="10px" fontWeight="600" fontSize="xl" >Ingresa con correo y contraseña</Text>
+                <Input id="email-login" type="email" placeholder="Email" borderColor="brand.primary" color="white" isRequired />
+                <Input id="password-login" type="password" borderColor="brand.primary"
                  placeholder="Password" isRequired />
-                <Button disabled={loading} type="submit" bgColor="black" >Entrar</Button>
+                <Button  disabled={loading} type="submit" bgColor="#3C5EEA" >Entrar</Button>
+                
+                <Box textAlign="center" width="100%" >
+                <HStack   onClick={handleGoogleLogin} cursor="pointer" position="relative" spacing="20px" px="6px" my="20px" borderRadius="10px" bgColor="white" h="40px" width="100%" >
+                    <Img position="absolute"  height="80%" src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg' alt="google icon" />
+                    <Text fontWeight="600" textAlign="center" width="100%" color="black" >Ingresa con Google</Text>
+                </HStack>
+                <Link    to="/auth/register" as={ReachLink} >¿No estás registrado?</Link>
+                </Box>
                 </VStack>
                 </form>
-                <HStack onClick={handleGoogleLogin} cursor="pointer" spacing="20px" px="6px" my="20px" borderRadius="10px" bgColor="white" h="40px" width="100%" >
-                    <Img  height="80%" src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg' alt="google icon" />
-                    <Text color="black" >Ingresa con Google</Text>
-                </HStack>
-                <Link  to="/auth/register" as={ReachLink} >¿No estás registrado?</Link>
+                
+                
             </Box>
         </Center>
     )

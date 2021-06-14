@@ -8,11 +8,12 @@ import {
   } from 'react-router-dom';
 import { login } from "../actions/auth"
 import { AuthRouter } from './AuthRouter';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {PrivateRoute} from "./PrivateRoute"
 import {PublicRoute} from "./PublicRoute"
 import MainScreen from '../containers/MainScreen';
 import Crud from '../containers/Crud';
+import { AdminRoute } from './AdminRoute';
 
 export const AppRouter = () => {
 
@@ -20,6 +21,7 @@ export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
     const dispatch = useDispatch()
+    const uid = useSelector(state => state.auth.uid)
 
   
 
@@ -67,11 +69,12 @@ export const AppRouter = () => {
                         isAuthenticated={isLoggedIn}
                     />
 
-                    <PrivateRoute 
+                    <AdminRoute 
                         exact
                         path="/crud"
                         component={ Crud }
                         isAuthenticated={isLoggedIn}
+                        uid={uid}
                     />
 
                     <Redirect to="/auth/login" />
