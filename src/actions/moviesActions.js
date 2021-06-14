@@ -1,5 +1,4 @@
 import { types } from "../types/types";
-import {db} from "../firebase/firebase-config"
 import { goSearchMovies } from "../helpers/goSearchMovies";
 
 export const movieSearch = (categorie) => {
@@ -16,9 +15,9 @@ export const startMovieSelected = (categorie) => {
         const last = getState().movies.last
         const selected = getState().movies.selected
         const movies = await goSearchMovies(categorie,selected,last)
-        if(movies.length){
-            dispatch(movieLastDoc(movies[movies.length-1].id))
-        }
+
+        dispatch(movieLastDoc(movies[movies.length-1].id || null ))
+
         dispatch(movieSelected(movies))
         
     }
@@ -43,5 +42,12 @@ export const movieLastDoc = (doc) => {
     return {
         type: types.mvLastDoc,
         payload: doc
+    }
+}
+
+export const movieTrailer = (movie) => {
+    return {
+        type: types.mvTrailer,
+        payload: movie
     }
 }

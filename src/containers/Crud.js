@@ -7,10 +7,8 @@ const Crud = () => {
     return (
         <div>
             <SearchCrud/>
-            <FormCrud/>
             <CardsCrud/>
-            {/* <iframe src="https://embed.api.video/vod/vi4WYBRq0TLtekerHex0dURh" width="100%" height="100%" frameBorder="0" scrolling="no" allowFullScreen={true}></iframe> */}
-                    
+            <FormCrud/>                      
         </div>
     )
 }

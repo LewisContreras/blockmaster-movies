@@ -1,11 +1,11 @@
-import { act } from "react-dom/test-utils";
 import { types } from "../types/types";
 
  const initialState = {
     search:"Todas",
     selected:[],
     modal: null,
-    last : null
+    last : null,
+    trailer : null
 } 
 
 export const moviesReducer = (state = initialState , action) => {
@@ -32,6 +32,12 @@ export const moviesReducer = (state = initialState , action) => {
             return {
                 ...state,
                 last: action.payload
+            }
+        
+        case types.mvTrailer:
+            return {
+                ...state,
+                trailer: action.payload
             }
 
         default:

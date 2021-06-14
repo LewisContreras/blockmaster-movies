@@ -5,7 +5,8 @@ import {Flex, HStack, Text } from '@chakra-ui/layout'
 import React from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import {FaSearch, FaUser} from "react-icons/fa"
+import {FaSearch} from "react-icons/fa"
+import {GiExitDoor} from "react-icons/gi"
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../actions/auth'
 import {movieLastDoc, movieSearch, startMovieSelected} from "../actions/moviesActions"
@@ -15,10 +16,10 @@ function NavbarMain() {
     const dispatch = useDispatch()
     const search = useSelector(state => state.movies.search)
 
-    useEffect(() => {
-        dispatch(movieSearch(search))
-        dispatch(startMovieSelected(search))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(movieSearch(search))
+    //     dispatch(startMovieSelected(search))
+    // }, [])
 
     const handleLogout = ()=>{
         dispatch(startLogout())
@@ -55,7 +56,7 @@ function NavbarMain() {
     return (
         <Flex alignItems="center" position="fixed" top="0" zIndex="100" width="100%" h="112px" backgroundColor="brand.background">
             <HStack spacing={8} width="90%" mx="auto" >
-                <Icon cursor="pointer" onClick={handleLogout} as={FaUser} />
+                
                 <Img src="https://i.imgur.com/pwIYVhf.png" />
 
                 <HStack minWidth="400px" spacing={10}>
@@ -71,6 +72,7 @@ function NavbarMain() {
                     />
                     <Input ref={inputRef} color="brand.black" border="2px solid" borderColor="brand.primary" borderRadius="10px" backgroundColor="brand.white" type="tel" placeholder="Busca tu película favorita" />
                 </InputGroup>
+                <Icon fontSize="30px" color="red" cursor="pointer" onClick={handleLogout} as={GiExitDoor} />
             </HStack>
         </Flex>
     )

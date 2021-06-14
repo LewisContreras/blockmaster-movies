@@ -4,6 +4,7 @@ import React from 'react'
 import * as Yup from "yup"
 import { db } from '../../firebase/firebase-config'
 import { fileUpload } from '../../helpers/fileUpload'
+import Swal from "sweetalert2"
 
 const FormCrud = () => {
 
@@ -48,7 +49,12 @@ const FormCrud = () => {
         },
         onSubmit: values =>{
             values.nameMovie = values.nameMovie.toUpperCase()
-            db.collection("prueba").add(values)
+            db.collection("movies").add(values)
+            Swal.fire({
+                icon: 'success',
+                title: '!Genial!',
+                text: 'Se ha agregado la película'
+              })
         }
     })
 
@@ -63,15 +69,19 @@ const FormCrud = () => {
         
     }
 
-    // const handleSubmit = (e) =>{
-    //     e.preventDefault()
-    //     console.log("hola");
-    // }
+   const handleReset = (e) =>{
+       e.preventDefault()
+       e.target.reset()
+   }
 
     return (
         <Flex mt="20px" justifyContent="center" >
             <Box width="400px" borderRadius="10px" p="10px" bgColor="whiteAlpha.500" >
-                <Box as="form" onSubmit={formik.handleSubmit} >
+                <Box as="form" onSubmit={(e)=>{
+                    formik.handleSubmit()
+                    handleReset(e)
+                }} >
+                    <Text textAlign="center" fontSize="2xl" color="brand.primary" >Agrega una nueva película</Text>
                     <VStack spacing="20px" >
                         <FormControl id="movie-name" >
                             <FormLabel>Nombre *</FormLabel>

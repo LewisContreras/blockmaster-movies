@@ -11,5 +11,8 @@ export const types = {
     mvSelected: "[MV] movie selected",
     mvSearch: "[MV] movie to search",
     mvModal: "[MV] movie modal",
-    mvLastDoc : "[MV] last query movie"
+    mvLastDoc : "[MV] last query movie",
+    mvTrailer: "[MV] movie tailer",
+
+    crSearch: "[CR] crud search movie"
 }

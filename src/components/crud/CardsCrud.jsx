@@ -2,63 +2,60 @@ import { Box, Button, FormControl, FormLabel, HStack, Icon, Img, Input, Text, Te
 import React, { useEffect, useState } from 'react'
 import { MdClose, MdUpdate } from 'react-icons/md'
 import { db } from '../../firebase/firebase-config'
-import axios from "axios"
+import {useSelector, useDispatch} from "react-redux"
 import { fileUpload } from '../../helpers/fileUpload'
+import {crudSearch} from "../../actions/crudActions"
+import Swal from "sweetalert2"
 
 
 const CardsCrud = () => {
 
     const [cards, setCards] = useState([])
     const [change, setChange] = useState(true)
-    const [update, setUpdate] = useState({})
+    const searchCrud = useSelector(state => state.crud.search)
+    const dispatch = useDispatch()
 
 
-    const auth = async ( )=>{
+    // const auth = async ( )=>{
         
-        const apiKey = "dvifpaPG0mjH0GVByWcxhy0nfltmawPpodjgF9g4s6F"
-        const objectKey ={
-            "apiKey": apiKey
-        }
-        const videoId = "vi4WYBRq0TLtekerHex0dURh"        
-        // let resp = await axios.post(`https://sandbox.api.video/auth/api-key`,objectKey)
-        // let resp = await axios.get(`https://ws.api.video/videos/${videoId}`)
-        // console.log(resp);
-    }
+    //     const apiKey = "dvifpaPG0mjH0GVByWcxhy0nfltmawPpodjgF9g4s6F"
+    //     const objectKey ={
+    //         "apiKey": apiKey
+    //     }
+    //     const videoId = "vi4WYBRq0TLtekerHex0dURh"        
+    //     let resp = await axios.post(`https://sandbox.api.video/auth/api-key`,objectKey)
+    //     let resp = await axios.get(`https://ws.api.video/videos/${videoId}`)
+    //     console.log(resp);
+    // }
 
-
-    useEffect(() => {
-        // auth()
-        db.collection("prueba").get().then(snap =>{
-            let movies = []
-            snap.forEach(hijo => {
-                movies.push({
-                    id:hijo.id,
-                    ...hijo.data()
-                })
-            });
-            setCards(movies)
-        })
-    }, [change])
 
     const handleDelete = async (movie)=>{
-        let hola = await db.doc(`prueba/${movie.id}`).delete()
-        setChange(!change)
+        let hola = await db.doc(`movies/${movie.id}`).delete()
+        Swal.fire({
+            icon: 'success',
+            title: '!Genial¡',
+            text: 'Ha sido eliminada correctamente'
+          })
+        dispatch(crudSearch([]))
     }
 
-    const handleUpdate = async (movie)=>{
-        let genre = document.getElementById("update-form")
-        let area = document.getElementById("update-description-area")
-        let image = document.getElementById("update-image")
+    const handleUpdate = async (e,movie)=>{
+        let genre = e.target.parentElement.parentElement.parentElement
+        let area = genre.querySelector("#update-description-area")
+        let image = genre.querySelector("#update-image")
         let inputs = genre.querySelectorAll("input")
         for (const input of inputs) {
             input.disabled = false
             input.style.border = "1px solid white"
+            if(input.name === "update"){
+                input.style.backgroundColor = "teal"
+            }
 
         }
         area.disabled = false
         area.style.border = "1px solid white"
         image.style.display = "block"
-        // setChange(!change)
+
     }
 
     const handleUpdateSubmit = async (e,movie) =>{
@@ -83,8 +80,13 @@ const CardsCrud = () => {
         }
         updatedMovie[area.name] = area.value
         updatedMovie.imageUrl = image.src
-        let resp = await db.doc(`prueba/${movie.id}`).update(updatedMovie)
-        console.log(resp);
+        let resp = await db.doc(`movies/${movie.id}`).update(updatedMovie)
+        Swal.fire({
+            icon: 'success',
+            title: '!Bien!',
+            text: 'Ha sido actualizado'
+          })
+        dispatch(crudSearch([]))
     }
 
 
@@ -104,9 +106,9 @@ const CardsCrud = () => {
     return (
         <Box>
             {
-                !cards.length
+                !searchCrud.length
                 ?<Text></Text>
-                :cards.map(movie =>
+                :searchCrud.map(movie =>
                 <Box id="update-form" as="form" m="10px" key={movie.id} onSubmit={(e)=>handleUpdateSubmit(e,movie)} >
                     <HStack spacing={10} px="10px" bgColor="whiteAlpha.300" height="250px" >
                     <VStack width="250px" >
@@ -144,8 +146,8 @@ const CardsCrud = () => {
                     </VStack>
                     <VStack>
                         <Icon cursor="pointer" width="30px" h="30px" borderRadius="4px" bgColor="red" as={MdClose} onClick={()=>handleDelete(movie)} />
-                        <Icon cursor="pointer" borderRadius="4px" width="30px" h="30px"  bgColor="teal.400" as={MdUpdate} onClick={()=>handleUpdate(movie)} />
-                        <Input value="Actualizar" name="update" disabled type="submit" />
+                        <Icon cursor="pointer" borderRadius="4px" width="30px" h="30px"  bgColor="teal.400" as={MdUpdate} onClick={(e)=>handleUpdate(e,movie)} />
+                        <Input value="Actualizar" cursor="pointer" name="update" disabled type="submit" />
                     </VStack>
                     </HStack>
                     

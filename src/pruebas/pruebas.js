@@ -13,5 +13,5 @@
         
     // )
 
-//  ref={lastItem} 
-{/* <div id="visor" ></div> */}
+ 
+{/* <div id="visor" ref={lastItem} ></div> */}

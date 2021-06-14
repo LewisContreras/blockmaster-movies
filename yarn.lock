@@ -12150,6 +12150,11 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
+"sweetalert2@^11.0.17":
+  "integrity" "sha512-oaCGCNjMU648bDg5+/mdStfFNG9sYEejeEZQY8JpAakUM0pLflB3neNyArAZGcWNUQX1y/jOeRdzcNE05Una4A=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.0.17.tgz"
+  "version" "11.0.17"
+
 "swiper@^6.7.0":
   "integrity" "sha512-zCfvWn7H7mCq7jgVurckhAwkjPUeMCkdC4rA7lagvaD3mIrNhKiaYYo2+nkxMVpiaWuCQ38e44Mya/dKb7HpyQ=="
   "resolved" "https://registry.npmjs.org/swiper/-/swiper-6.7.0.tgz"
