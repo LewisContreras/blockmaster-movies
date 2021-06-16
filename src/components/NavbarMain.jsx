@@ -59,7 +59,7 @@ function NavbarMain() {
         dispatch(startMovieSelected(contenido))
         setLoading(false)
         window.scrollTo({
-            top:320,
+            top:380,
             behavior: "smooth"
         })
         let navCategories = document.querySelectorAll(".nav-category")
