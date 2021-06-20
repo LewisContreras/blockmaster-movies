@@ -2,24 +2,44 @@
 
 Revive una tienda icónica para rentar películas, regresa con una nueva plataforma de streaming.
 
-## Requerimientos Técnicos
+Aplicación hecha con ReactJS + Redux y un backend como servicio haciendo uso de firebase.
+Como marco de trabajo se hizo uso de Chakra UI.
 
-Realiza la aplicación haciendo uso de ReactJS + Redux y crea un backend como servicio haciendo uso de Firebase
-
-Agrega un scroll infinito o paginación al ver toda la colección de películas, además conecta una API para poder reproducir la película.
-
-Requerimientos
-
-- Módulo CRUD de películas (Crear, Leer, Actualizar y Eliminar) 
-- Agregar paginación o scroll infinito(Arreglos)
+[Aquí](https://lewiscontreras.github.io/blockmaster-movies/) puedes ver el despliegue.
 
 
-Realizados: 
+## Requerimientos 
+--------
 
-- Accesibilidad como prioridad
-- Sube tu código a GitHub
-- Publica tu resultado con github pages
-- Añadir descripción de cada película
-- Añadir el buscador
-- Conectar API de videos
-- Añadir video Tráiler de 5 películas
+Debes tener node.js y npm para poder hacer la instalación.
+
+
+## Clonar proyecto
+--------
+
+Debes usar el siguiente comando en tu consola para clonar el proyecto:
+
+```bash
+$ git clone https://github.com/LewisContreras/blockmaster-movies.git
+```
+
+una vez clonado el proyecto, debes ingresar a la carpeta en que este fue clonado.
+
+## Instalar dependencias
+
+Para instalar las dependencias usa el siguiiente comando:
+
+```
+$ npm i
+```
+
+Para correr el proyecto en un servidor local usa el siguiente comando:
+
+```
+$ npm start
+```
+
+
+
+
+
