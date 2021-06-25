@@ -39,6 +39,19 @@ Para correr el proyecto en un servidor local usa el siguiente comando:
 $ npm start
 ```
 
+## Vistas
+------------------------
+
+### Mobile
+
+
+![image](https://i.imgur.com/rwfsmdJ.png)
+![image](https://i.imgur.com/oyit5XV.png)
+
+### Desktop
+
+
+![image](https://i.imgur.com/jvChYsG.png)
 
 
 

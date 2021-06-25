@@ -32,12 +32,12 @@ function ModalEachMovie() {
     return (
         !modal
         ?<Box display="none" ></Box>
-        :<Flex className="scene_element scene_element--fadein" justifyContent="center" bgColor="rgba(15,14,23,0.9)"  position="fixed" top="0" width="100vw" h="100vh" p="40px" zIndex="100" >
-            <HStack position="relative" spacing="30px" maxWidth="700px" >
+        :<Flex className="scene_element scene_element--fadein" justifyContent="center" bgColor="rgba(15,14,23,0.9)"  position="fixed" top="0" width="100vw" h="100vh" p={["0","40px"]} zIndex="100" >
+            <HStack flexDir={["column","row"]} pt={["80px","0"]} position="relative" spacing="30px" maxWidth="700px" >
                 <Img h="330px" width="220px" src={modal.imageUrl} alt="Hard Kill" />
                 <Icon onClick={()=>dispatch(movieModal(null))} cursor="pointer" fontSize="30px" top="40px" right="40px" position="absolute" as={MdClose} />
-                <VStack alignItems="start" >
-                    <Text>{modal.nameMovie}</Text>
+                <VStack pt={3} spacing={3} alignItems="start" >
+                    <Text fontWeight="600" fontSize="xl" >{modal.nameMovie}</Text>
                     <Text>{modal.description}</Text>
                     <Text>{`${modal.year} * ${modal.genre} * ${Math.floor(modal.duration/60)}h ${modal.duration%60}min`}</Text>
                     <HStack >

@@ -21,10 +21,10 @@ function CardsContainer() {
         
             !selectedMovies.length
             ?<NothingFound/>
-            :<Grid pb="70px" className="scene_element scene_element--fadeinup" templateColumns="repeat(auto-fill,220px)" gap="10px" px="30px" mt="20px" justifyContent="space-between" >
+            :<Grid pb="70px" className="scene_element scene_element--fadeinup" templateColumns={["repeat(auto-fill,150px)","repeat(auto-fill,220px)"]} gap={["5px","10px"]} px={["0","30px"]} mt="20px" justifyContent={["space-evenly","space-between"]} >
             {
                 selectedMovies.map((el, index) =><Box onClick={()=>handleClickModal(el)}
-                position="relative" backgroundPosition="center" borderRadius="10px" backgroundSize="cover" cursor="pointer" backgroundImage={el.imageUrl} w="220px" h="330px" key={index} >
+                position="relative" backgroundPosition="center" borderRadius="10px" backgroundSize="cover" cursor="pointer" backgroundImage={el.imageUrl} w={["150px","220px"]} h={["225px","330px"]} key={index} >
                    <Center bgColor="rgba(0,0,0,0.5)"  color="brand.primary" px="30px"  position="absolute" height="64px" top="40px" border="2px solid" borderLeft="none" borderRadius="0 32px 32px 0" borderColor="brand.primary" >
                        <Icon mr="10px"  as={FaStar} />
                        <Text color="brand.white" >{el.calification.toFixed(1)}</Text>

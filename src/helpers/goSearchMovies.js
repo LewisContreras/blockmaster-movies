@@ -5,10 +5,10 @@ export const goSearchMovies = async (category,selected,last) =>{
         let movies = [...selected]
         if(category === "Todas"){
 
-                if(!last){
-                    movies = []
-                }
-                await db.collection("movies").orderBy("nameMovie").startAfter(last).limit(9).get().then(snap =>{
+                
+                movies = []
+                
+                await db.collection("movies").orderBy("nameMovie").get().then(snap =>{
                     last = snap.docs[snap.docs.length -1].id
 
                     snap.forEach(hijo => {
