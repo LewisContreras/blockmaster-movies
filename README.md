@@ -1,4 +1,4 @@
-# Block Master
+# Blockmaster
 
 Revive una tienda icónica para rentar películas, regresa con una nueva plataforma de streaming.
 
