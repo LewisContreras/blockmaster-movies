@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Link as ReachLink} from "react-router-dom"
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
 import "../../styles/animations.css"
+import { FaGoogle } from 'react-icons/fa'
+import { Icon } from '@chakra-ui/react'
 
 function LoginScreen() {
     const dispatch = useDispatch()
@@ -44,7 +46,7 @@ function LoginScreen() {
                 
                 <Box textAlign="center" width="100%" >
                 <HStack   onClick={handleGoogleLogin} cursor="pointer" position="relative" spacing="20px" px="6px" my="20px" borderRadius="10px" bgColor="white" h="40px" width="100%" >
-                    <Img position="absolute"  height="80%" src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg' alt="google icon" />
+                    <Icon as={FaGoogle} fontSize="20px" color={"#3C5EEA"} />
                     <Text fontWeight="600" textAlign="center" width="100%" color="black" >Ingresa con Google</Text>
                 </HStack>
                 <Link    to="/auth/register" as={ReachLink} >¿No estás registrado?</Link>
