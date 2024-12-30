@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Icon, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { crudSearch } from "../../actions/crudActions";
 import { db } from "../../firebase/firebase-config";
@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 const SearchCrud = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [error, setError] = useState(false);
   const searchCrud = useSelector((state) => state.crud.search);
 
   const handleSearchCrud = async (e) => {
@@ -28,9 +27,7 @@ const SearchCrud = () => {
             ...hijo.data(),
           });
         });
-        setError(false);
       })
-      .catch((err) => setError(true));
     dispatch(crudSearch(movieSearched));
   };
 

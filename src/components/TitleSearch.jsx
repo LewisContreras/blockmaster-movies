@@ -7,7 +7,7 @@ const TitleSearch = () => {
     const search = useSelector(state => state.movies.search)
     const selected = useSelector(state => state.movies.selected)
     let textSearch = ""
-    if(  search=== "" || !!search && !selected.length ){
+    if(  search=== "" || (!!search && !selected.length) ){
         textSearch = ""
     }else if(search === "Todas"){
         textSearch = search + " las películas"

@@ -20,17 +20,7 @@ function NavbarMain() {
     const [loading, setLoading] = useState(false)
     const mounted = useRef(false)
 
-    const handleScroll = (e)=>{
-        let scrollTop = document.scrollingElement.scrollTop
-        let scrollHeight = document.scrollingElement.scrollHeight
-        let viewport = document.scrollingElement.clientHeight
-        // if(scrollTop + viewport + 0.5 > scrollHeight  ){
-        //     setLoading(true)
-        // }
-    }
-
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
         if(loading && search === "Todas"){
             dispatch(startMovieSelected(search))
             
@@ -47,10 +37,7 @@ function NavbarMain() {
             dispatch(startMovieSelected(search))
             mounted.current = true
         }
-        return ()=>{
-            window.removeEventListener("scroll", handleScroll)
-        }
-    }, [loading,dispatch])
+    }, [loading,dispatch,search])
 
     const handleClickCategories = (e) =>{
         let contenido = e.target.textContent
