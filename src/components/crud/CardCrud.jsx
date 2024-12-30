@@ -1,27 +1,31 @@
 import React from "react";
 import {
-    Box,
-    Button,
-    Center,
-    FormControl,
-    FormLabel,
-    HStack,
-    Icon,
-    Img,
-    Input,
-    Text,
-    Textarea,
-    VStack,
-  } from "@chakra-ui/react";
-  import { MdClose, MdUpdate } from "react-icons/md";
+  Box,
+  Button,
+  Center,
+  FormControl,
+  FormLabel,
+  HStack,
+  Icon,
+  Img,
+  Input,
+  Text,
+  Textarea,
+  VStack,
+} from "@chakra-ui/react";
+import { MdClose, MdUpdate } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { crudSearch } from "../../actions/crudActions";
 
 const CardCrud = ({
-    movie,
-    handleDelete,
-    handleUpdate,
-    handleUpdateSubmit,
-    handleChangeImage,
-    handleNewImage}) => {
+  movie,
+  handleDelete,
+  handleUpdate,
+  handleUpdateSubmit,
+  handleChangeImage,
+  handleNewImage,
+}) => {
+  const dispatch = useDispatch();
   return (
     <Center
       className="scene_element scene_element--fadein"
