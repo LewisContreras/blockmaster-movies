@@ -10,15 +10,13 @@ import "../../styles/animations.css"
 
 
 const CardsCrud = () => {
-
-    const [cards, setCards] = useState([])
-    const [change, setChange] = useState(true)
     const searchCrud = useSelector(state => state.crud.search)
     const dispatch = useDispatch()
 
 
     const handleDelete = async (movie)=>{
         let hola = await db.doc(`movies/${movie.id}`).delete()
+        
         Swal.fire({
             icon: 'success',
             title: '!Genial¡',
@@ -68,7 +66,7 @@ const CardsCrud = () => {
         }
         updatedMovie[area.name] = area.value
         updatedMovie.imageUrl = image.src
-        let resp = await db.doc(`movies/${movie.id}`).update(updatedMovie)
+        await db.doc(`movies/${movie.id}`).update(updatedMovie)
         Swal.fire({
             icon: 'success',
             title: '!Bien!',
