@@ -1,43 +1,30 @@
-import Icon from '@chakra-ui/icon'
-
-import { Grid, Center, Text, Box } from '@chakra-ui/layout'
-import React from 'react'
-import { FaStar } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { movieModal } from '../actions/moviesActions'
-import NothingFound from "./NothingFound.jsx"
-import "../styles/animations.css"
+import { Grid } from "@chakra-ui/layout";
+import React from "react";
+import { useSelector } from "react-redux";
+import NothingFound from "./NothingFound.jsx";
+import "../styles/animations.css";
+import { CardMovie } from "./CardMovie.jsx";
 
 function CardsContainer() {
+  const selectedMovies = useSelector((state) => state.movies.selected);
 
-    const dispatch = useDispatch()
-    const selectedMovies = useSelector(state => state.movies.selected)
-
-    const handleClickModal = (movie)=>{
-        dispatch(movieModal(movie))
-    }
-
-    return (
-        
-            !selectedMovies.length
-            ?<NothingFound/>
-            :<Grid pb="70px" className="scene_element scene_element--fadeinup" templateColumns={["repeat(auto-fill,150px)","repeat(auto-fill,220px)"]} gap={["5px","10px"]} px={["0","30px"]} mt="20px" justifyContent={["space-evenly","space-between"]} >
-            {
-                selectedMovies.map((el, index) =><Box onClick={()=>handleClickModal(el)}
-                position="relative" backgroundPosition="center" borderRadius="10px" backgroundSize="cover" cursor="pointer" backgroundImage={el.imageUrl} w={["150px","220px"]} h={["225px","330px"]} key={index} >
-                   <Center bgColor="rgba(0,0,0,0.5)"  color="brand.primary" px="30px"  position="absolute" height="64px" top="40px" border="2px solid" borderLeft="none" borderRadius="0 32px 32px 0" borderColor="brand.primary" >
-                       <Icon mr="10px"  as={FaStar} />
-                       <Text color="brand.white" >{el.calification.toFixed(1)}</Text>
-                   </Center>
-               </Box>)
-            }
-            
-        </Grid>
-
-        
-            
-        
-    )
+  return !selectedMovies.length ? (
+    <NothingFound />
+  ) : (
+    <Grid
+      pb="70px"
+      className="scene_element scene_element--fadeinup"
+      templateColumns={["repeat(auto-fill,150px)", "repeat(auto-fill,220px)"]}
+      gap={["5px", "10px"]}
+      px={["0", "30px"]}
+      mt="20px"
+      justifyContent={["space-evenly", "space-between"]}
+    >
+      {selectedMovies.map((el, index) => (
+        <CardMovie key={index} movie={el} />
+      ))}
+    </Grid>
+  );
 }
 
-export default CardsContainer
+export default CardsContainer;
