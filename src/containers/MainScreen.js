@@ -8,14 +8,14 @@ import TitleSearch from "../components/TitleSearch.jsx";
 
 function MainScreen() {
   return (
-    <div>
+    <>
       <NavbarMain />
       <SliderMain />
       <TitleSearch />
       <CardsContainer />
       <ModalEachMovie />
       <TrailerMovie />
-    </div>
+    </>
   );
 }
 

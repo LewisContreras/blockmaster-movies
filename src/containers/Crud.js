@@ -1,16 +1,16 @@
-import React from 'react'
-import CardsCrud from '../components/crud/CardsCrud'
-import FormCrud from '../components/crud/FormCrud'
-import SearchCrud from '../components/crud/SearchCrud'
+import React from "react";
+import CardsCrud from "../components/crud/CardsCrud";
+import FormCrud from "../components/crud/FormCrud";
+import SearchCrud from "../components/crud/SearchCrud";
 
 const Crud = () => {
-    return (
-        <div>
-            <SearchCrud/>
-            <CardsCrud/>
-            <FormCrud/>                      
-        </div>
-    )
-}
+  return (
+    <>
+      <SearchCrud />
+      <CardsCrud />
+      <FormCrud />
+    </>
+  );
+};
 
-export default Crud
+export default Crud;
