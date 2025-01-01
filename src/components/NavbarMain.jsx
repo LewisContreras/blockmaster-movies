@@ -6,15 +6,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { FaSearch } from "react-icons/fa";
-import { GiExitDoor } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { startLogout } from "../actions/auth";
 import {
   movieLastDoc,
   movieSearch,
   startMovieSelected,
 } from "../actions/moviesActions";
 import { MenuOptions } from "./MenuOptions";
+import { LogoutIcon } from "./LogoutIcon";
 // import GoCrud from './GoCrud'
 
 function NavbarMain() {
@@ -100,21 +99,7 @@ function NavbarMain() {
             placeholder="Busca tu película favorita"
           />
         </InputGroup>
-        {/* {
-                    uid === "Th1NLjQWVLao0xs1jr0yxbMvKE23"
-                    ?<GoCrud />
-                    :null
-                } */}
-        <Icon
-          position={["absolute", "absolute", "relative"]}
-          top={["20px", "20px", "0"]}
-          right={["20px", "20px", "0"]}
-          fontSize="30px"
-          color="red"
-          cursor="pointer"
-          onClick={() => dispatch(startLogout())}
-          as={GiExitDoor}
-        />
+        <LogoutIcon />
       </HStack>
     </Flex>
   );
