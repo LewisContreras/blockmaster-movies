@@ -9,12 +9,13 @@ import {
   Icon,
   Img,
   Input,
-  Text,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import { MdClose, MdUpdate } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { crudSearch } from "../../actions/crudActions";
 import { db } from "../../firebase/firebase-config";
 import { fileUpload } from "../../helpers/fileUpload";
@@ -24,7 +25,7 @@ import "../../styles/animations.css";
 const CardCrud = ({ movie }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = async (movie) => {
+  const handleDelete = async () => {
     await db.doc(`movies/${movie.id}`).delete();
 
     Swal.fire({
@@ -35,70 +36,48 @@ const CardCrud = ({ movie }) => {
     dispatch(crudSearch([]));
   };
 
-  const handleUpdate = async (e) => {
-    let genre = e.target.parentElement.parentElement.parentElement;
-    let area = genre.querySelector("#update-description-area");
-    let image = genre.querySelector("#update-image");
-    let inputs = genre.querySelectorAll("input");
-    for (const input of inputs) {
-      input.disabled = false;
-      input.style.border = "1px solid white";
-      if (input.name === "update") {
-        input.style.backgroundColor = "#00A300";
-      }
-    }
-    area.disabled = false;
-    area.style.border = "1px solid white";
-    image.style.display = "block";
+  const handleNewImage = async (file, setFieldValue) => {
+    const secureUrl = await fileUpload(file);
+    setFieldValue("imageUrl", secureUrl);
   };
 
-  const handleUpdateSubmit = async (e, movie) => {
-    e.preventDefault();
-    let form = e.target;
-    let area = document.getElementById("update-description-area");
-    let image = document.getElementById("image-element");
-    let inputs = form.querySelectorAll("input");
-    let updatedMovie = {};
-    for (const input of inputs) {
-      if (input.name === "update" || input.name === "update-image-input") {
-        continue;
-      }
-      if (
-        input.name === "calification" ||
-        input.name === "year" ||
-        input.name === "duration"
-      ) {
-        updatedMovie[input.name] = +input.value;
-      } else if (input.name === "nameMovie") {
-        updatedMovie[input.name] = input.value.toUpperCase();
-      } else {
-        updatedMovie[input.name] = input.value;
-      }
-    }
-    updatedMovie[area.name] = area.value;
-    updatedMovie.imageUrl = image.src;
-    await db.doc(`movies/${movie.id}`).update(updatedMovie);
-    Swal.fire({
-      icon: "success",
-      title: "!Bien!",
-      text: "Ha sido actualizado",
-    });
-    dispatch(crudSearch(""));
-  };
+  const formik = useFormik({
+    initialValues: {
+      nameMovie: movie.nameMovie,
+      description: movie.description,
+      calification: movie.calification,
+      year: movie.year,
+      genre: movie.genre,
+      duration: movie.duration,
+      imageUrl: movie.imageUrl,
+    },
+    validationSchema: Yup.object({
+      nameMovie: Yup.string().required("El nombre es obligatorio"),
+      description: Yup.string().required("La descripción es obligatoria"),
+      calification: Yup.number()
+        .min(0, "Debe ser al menos 0")
+        .max(10, "Debe ser como máximo 10")
+        .required("La calificación es obligatoria"),
+      year: Yup.number()
+        .min(1900, "Año no válido")
+        .max(new Date().getFullYear(), "Año no válido")
+        .required("El año es obligatorio"),
+      genre: Yup.string().required("El género es obligatorio"),
+      duration: Yup.number()
+        .min(1, "Debe ser al menos 1")
+        .required("La duración es obligatoria"),
+    }),
+    onSubmit: async (values) => {
+      await db.doc(`movies/${movie.id}`).update(values);
+      Swal.fire({
+        icon: "success",
+        title: "!Bien!",
+        text: "Ha sido actualizado",
+      });
+      dispatch(crudSearch(""));
+    },
+  });
 
-  const handleChangeImage = () => {
-    let inputFile = document.getElementById("update-image-input");
-    inputFile.click();
-  };
-
-  const handleNewImage = async (e) => {
-    let file = e.target.files[0];
-    let secureUrl = await fileUpload(file);
-    let image = document.getElementById("image-element");
-    image.src = secureUrl;
-    console.log(secureUrl);
-  };
-  
   return (
     <Center
       className="scene_element scene_element--fadein"
@@ -107,11 +86,10 @@ const CardCrud = ({ movie }) => {
       w="100vw"
       h="100vh"
       top="0"
-      id="update-form"
       as="form"
       bgColor="rgba(15,14,23,0.9)"
       p="10px"
-      onSubmit={(e) => handleUpdateSubmit(e, movie)}
+      onSubmit={formik.handleSubmit}
     >
       <Box
         position="relative"
@@ -142,156 +120,113 @@ const CardCrud = ({ movie }) => {
           spacing={10}
         >
           <VStack width="250px">
-            <FormControl
-              id="update-name-movie"
-              display="flex"
-              alignItems="baseline"
-            >
+            <FormControl>
               <Input
-                textAlign="center"
                 name="nameMovie"
-                disabled
-                border="none"
-                defaultValue={movie.nameMovie}
-                type="text"
+                placeholder="Nombre de la película"
+                value={formik.values.nameMovie}
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.nameMovie && !!formik.errors.nameMovie
+                }
               />
             </FormControl>
             <Img
               id="image-element"
-              name="image"
               height="240px"
-              src={movie.imageUrl}
+              src={formik.values.imageUrl}
             />
             <Button
-              id="update-image"
-              display="none"
               colorScheme="teal"
-              onClick={handleChangeImage}
+              onClick={() =>
+                document.getElementById("update-image-input").click()
+              }
             >
               Cambiar foto
             </Button>
             <Input
               id="update-image-input"
               display="none"
-              name="update-image-input"
-              onChange={handleNewImage}
               type="file"
+              onChange={(e) =>
+                handleNewImage(e.target.files[0], formik.setFieldValue)
+              }
             />
           </VStack>
 
           <VStack alignItems="start" width="400px">
-            <FormControl id="update-description">
-              <FormLabel>{`Descripción: `}</FormLabel>
+            <FormControl>
+              <FormLabel>Descripción</FormLabel>
               <Textarea
-                id="update-description-area"
-                h="160px"
-                wordBreak="break-word"
                 name="description"
-                disabled
-                border="none"
-                defaultValue={movie.description}
+                placeholder="Descripción"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.description && !!formik.errors.description
+                }
               />
             </FormControl>
             <HStack spacing={10}>
-              <FormControl
-                id="update-calification"
-                display="flex"
-                alignItems="baseline"
-              >
-                <FormLabel>{`Calification: `}</FormLabel>
+              <FormControl>
+                <FormLabel>Calificación</FormLabel>
                 <Input
-                  h="30px"
-                  width="60px"
                   name="calification"
-                  disabled
-                  border="none"
-                  step="0.1"
-                  defaultValue={movie.calification}
                   type="number"
+                  placeholder="Calificación"
+                  value={formik.values.calification}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.calification && !!formik.errors.calification
+                  }
                 />
               </FormControl>
-              <FormControl
-                id="update-year"
-                display="flex"
-                alignItems="baseline"
-              >
-                <FormLabel>{`Año: `}</FormLabel>
+              <FormControl>
+                <FormLabel>Año</FormLabel>
                 <Input
-                  h="30px"
-                  width="80px"
                   name="year"
-                  disabled
-                  border="none"
-                  defaultValue={movie.year}
                   type="number"
+                  placeholder="Año"
+                  value={formik.values.year}
+                  onChange={formik.handleChange}
+                  isInvalid={formik.touched.year && !!formik.errors.year}
                 />
               </FormControl>
             </HStack>
             <HStack spacing={8}>
-              <FormControl
-                id="update-genre"
-                display="flex"
-                alignItems="baseline"
-              >
-                <FormLabel>{`Género: `}</FormLabel>
+              <FormControl>
+                <FormLabel>Género</FormLabel>
                 <Input
-                  px={1}
-                  w="100px"
                   name="genre"
-                  disabled
-                  border="none"
-                  defaultValue={movie.genre}
-                  type="text"
+                  placeholder="Género"
+                  value={formik.values.genre}
+                  onChange={formik.handleChange}
+                  isInvalid={formik.touched.genre && !!formik.errors.genre}
                 />
               </FormControl>
-              <FormControl
-                id="update-duration"
-                display="flex"
-                alignItems="baseline"
-              >
-                <FormLabel>{`Duración: `}</FormLabel>
+              <FormControl>
+                <FormLabel>Duración</FormLabel>
                 <Input
                   name="duration"
-                  width="80px"
-                  disabled
-                  border="none"
-                  defaultValue={movie.duration}
                   type="number"
+                  placeholder="Duración"
+                  value={formik.values.duration}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.duration && !!formik.errors.duration
+                  }
                 />
               </FormControl>
             </HStack>
           </VStack>
         </HStack>
-        <HStack mt="20px" className="scene_element scene_element--fadeinleft">
-          <HStack
-            px="10px"
-            cursor="pointer"
-            h="40px"
-            borderRadius="4px"
-            bgColor="red"
-            onClick={() => handleDelete(movie)}
-          >
-            <Text fontWeight="600">Eliminar </Text>
-            <Icon fontSize="20px" as={MdClose} />
-          </HStack>
-          <HStack
-            px="10px"
-            cursor="pointer"
-            h="40px"
-            borderRadius="4px"
-            bgColor="teal.600"
-            onClick={(e) => handleUpdate(e, movie)}
-          >
-            <Text fontWeight="600">Modificar </Text>
-            <Icon fontSize="20px" as={MdUpdate} />
-          </HStack>
-          <Input
-            value="Actualizar"
-            cursor="pointer"
-            name="update"
-            disabled
-            type="submit"
-          />
+        <HStack mt="20px">
+          <Button colorScheme="red" onClick={handleDelete}>
+            Eliminar
+          </Button>
+          <Button type="submit" colorScheme="teal">
+            Actualizar
+          </Button>
         </HStack>
       </Box>
     </Center>
