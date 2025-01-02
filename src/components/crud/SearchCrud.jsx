@@ -1,14 +1,12 @@
-import { Box, Button, HStack, Icon, Input, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, Text } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { crudSearch } from "../../actions/crudActions";
 import { db } from "../../firebase/firebase-config";
-import { FaHome } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import { GoHomeIcon } from "./GoHomeIcon";
 
 const SearchCrud = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const searchCrud = useSelector((state) => state.crud.search);
 
   const handleSearchCrud = async (e) => {
@@ -34,17 +32,7 @@ const SearchCrud = () => {
   return (
     <Box py="20px" maxWidth="70%" mx="auto">
       <HStack as="form" onSubmit={handleSearchCrud}>
-        <Icon
-          cursor="pointer"
-          mx="10px"
-          fontSize="20px"
-          color="brand.primary"
-          as={FaHome}
-          onClick={() => {
-            dispatch(crudSearch(""));
-            history.goBack();
-          }}
-        />
+        <GoHomeIcon />
         <Input type="text" placeholder="Nombre de la película..." />
         <Button bgColor="brand.primary" type="submit">
           Buscar
