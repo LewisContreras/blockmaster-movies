@@ -5,43 +5,37 @@ import { Center, Box, Text, VStack, Link } from "@chakra-ui/layout";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link as ReachLink } from "react-router-dom";
-import validator from "validator";
-import { useForm } from "../../hooks/useForm";
-import { setError } from "../../actions/uiActions";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import "../../styles/animations.css";
+import { FormError } from "../FormError";
 
 function RegisterScreen() {
   const dispatch = useDispatch();
-  const [values, handleInputChange] = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password2: "",
-  });
 
-  const { name, email, password, password2 } = values;
-
-  const formValid = () => {
-    if (name.trim().length === 0) {
-      dispatch(setError("nombre requerido"));
-      return false;
-    } else if (!validator.isEmail(email)) {
-      dispatch(setError("email requerido"));
-      return false;
-    } else if (password2 !== password) {
-      dispatch(setError("password requerido"));
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmitRegister = (e) => {
-    e.preventDefault();
-    if (formValid()) {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Nombre requerido"),
+      email: Yup.string().email("Email inválido").required("Email requerido"),
+      password: Yup.string()
+        .min(6, "La contraseña debe tener al menos 6 caracteres")
+        .required("Contraseña requerida"),
+      password2: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir")
+        .required("Confirmar contraseña es requerido"),
+    }),
+    onSubmit: (values) => {
+      const { name, email, password } = values;
       dispatch(startRegisterWithEmailPasswordName(email, password, name));
-    }
-  };
+    },
+  });
 
   return (
     <Center h="100vh">
@@ -52,7 +46,7 @@ function RegisterScreen() {
         bgColor="brand.primary"
         p="1px"
       >
-        <form onSubmit={handleSubmitRegister}>
+        <form onSubmit={formik.handleSubmit}>
           <Center h="120px" borderRadius="10px 10px 0 0">
             <Img src="https://i.imgur.com/pwIYVhf.png" />
           </Center>
@@ -72,33 +66,41 @@ function RegisterScreen() {
               borderColor="brand.primary"
               placeholder="Name"
               name="name"
-              value={name}
-              onChange={handleInputChange}
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            <FormError error={formik.errors.name} />
             <Input
               type="email"
               borderColor="brand.primary"
               placeholder="Email"
               name="email"
-              value={email}
-              onChange={handleInputChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            <FormError error={formik.errors.email} />
             <Input
               type="password"
               borderColor="brand.primary"
               placeholder="Password"
               name="password"
-              value={password}
-              onChange={handleInputChange}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            <FormError error={formik.errors.password} />
             <Input
               type="password"
               borderColor="brand.primary"
-              placeholder="Confirm Pasword"
+              placeholder="Confirm Password"
               name="password2"
-              value={password2}
-              onChange={handleInputChange}
+              value={formik.values.password2}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            <FormError error={formik.errors.password2} />
             <Button type="submit" bgColor="#3C5EEA">
               Entrar
             </Button>
@@ -112,4 +114,4 @@ function RegisterScreen() {
   );
 }
 
-export default RegisterScreen;
+export { RegisterScreen };
