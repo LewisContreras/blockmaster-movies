@@ -1,6 +1,5 @@
 import { Button } from "@chakra-ui/button";
 import { Img } from "@chakra-ui/image";
-import { Input } from "@chakra-ui/input";
 import { Center, Box, Text, VStack, Link } from "@chakra-ui/layout";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -9,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import "../../styles/animations.css";
-import { FormError } from "../FormError";
+import { FormikInput } from "../FormikInput";
 
 function RegisterScreen() {
   const dispatch = useDispatch();
@@ -46,69 +45,33 @@ function RegisterScreen() {
         bgColor="brand.primary"
         p="1px"
       >
-        <form onSubmit={formik.handleSubmit}>
-          <Center h="120px" borderRadius="10px 10px 0 0">
-            <Img src="https://i.imgur.com/pwIYVhf.png" />
-          </Center>
-          <VStack
-            h="340px"
-            className="scene_element scene_element--clipmidup"
-            spacing="10px"
-            p="10px"
-            borderRadius="0 0 10px 10px"
-            bgColor="#14112e"
-          >
-            <Text fontSize="xl" fontWeight="600">
-              Regístrate
-            </Text>
-            <Input
-              type="text"
-              borderColor="brand.primary"
-              placeholder="Name"
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            <FormError error={formik.errors.name} />
-            <Input
-              type="email"
-              borderColor="brand.primary"
-              placeholder="Email"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            <FormError error={formik.errors.email} />
-            <Input
-              type="password"
-              borderColor="brand.primary"
-              placeholder="Password"
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            <FormError error={formik.errors.password} />
-            <Input
-              type="password"
-              borderColor="brand.primary"
-              placeholder="Confirm Password"
-              name="password2"
-              value={formik.values.password2}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            <FormError error={formik.errors.password2} />
-            <Button type="submit" bgColor="#3C5EEA">
-              Entrar
-            </Button>
-            <Link to="/auth/login" as={ReachLink}>
-              ¿Ya estás registrado?
-            </Link>
-          </VStack>
-        </form>
+        <Center h="120px" borderRadius="10px 10px 0 0">
+          <Img src="https://i.imgur.com/pwIYVhf.png" />
+        </Center>
+        <VStack
+          as="form"
+          onSubmit={formik.handleSubmit}
+          minH="340px"
+          className="scene_element scene_element--clipmidup"
+          spacing="10px"
+          p="10px"
+          borderRadius="0 0 10px 10px"
+          bgColor="#14112e"
+        >
+          <Text fontSize="xl" fontWeight="600">
+            Regístrate
+          </Text>
+          <FormikInput name="name" type="text" placeholder="Name" formik={formik} />
+          <FormikInput name="email" type="email" placeholder="Email" formik={formik} />
+          <FormikInput name="password" type="password" placeholder="Password" formik={formik} />
+          <FormikInput name="password2" type="password" placeholder="Confirm Password" formik={formik} />
+          <Button type="submit" bgColor="#3C5EEA">
+            Entrar
+          </Button>
+          <Link to="/auth/login" as={ReachLink}>
+            ¿Ya estás registrado?
+          </Link>
+        </VStack>
       </Box>
     </Center>
   );
