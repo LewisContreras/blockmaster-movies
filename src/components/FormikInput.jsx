@@ -13,6 +13,9 @@ const FormikInput = ({ name, type, placeholder, formik }) => {
         value={formik.values[name]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
+        isInvalid={
+          formik.touched[name] && !!formik.errors[name]
+        }
       />
       <FormError error={formik.errors[name]} />
     </>

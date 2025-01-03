@@ -16,6 +16,7 @@ import {
 import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { crudSearch } from "../../actions/crudActions";
+import { FormikInput } from "../FormikInput";
 
 const CardCrudPresenter = ({ formik, handleNewImage, handleDelete }) => {
   const dispatch = useDispatch();
@@ -62,14 +63,11 @@ const CardCrudPresenter = ({ formik, handleNewImage, handleDelete }) => {
         >
           <VStack width="250px">
             <FormControl>
-              <Input
+              <FormikInput
                 name="nameMovie"
-                placeholder="Nombre de la película"
-                value={formik.values.nameMovie}
-                onChange={formik.handleChange}
-                isInvalid={
-                  formik.touched.nameMovie && !!formik.errors.nameMovie
-                }
+                type="text"
+                placeholder="Nombre"
+                formik={formik}
               />
             </FormControl>
             <Img
@@ -101,6 +99,7 @@ const CardCrudPresenter = ({ formik, handleNewImage, handleDelete }) => {
               <Textarea
                 name="description"
                 placeholder="Descripción"
+                borderColor="brand.primary"
                 value={formik.values.description}
                 onChange={formik.handleChange}
                 isInvalid={
@@ -111,51 +110,40 @@ const CardCrudPresenter = ({ formik, handleNewImage, handleDelete }) => {
             <HStack spacing={10}>
               <FormControl>
                 <FormLabel>Calificación</FormLabel>
-                <Input
+                <FormikInput
                   name="calification"
                   type="number"
                   placeholder="Calificación"
-                  value={formik.values.calification}
-                  onChange={formik.handleChange}
-                  isInvalid={
-                    formik.touched.calification && !!formik.errors.calification
-                  }
+                  formik={formik}
                 />
               </FormControl>
               <FormControl>
                 <FormLabel>Año</FormLabel>
-                <Input
+                <FormikInput
                   name="year"
                   type="number"
                   placeholder="Año"
-                  value={formik.values.year}
-                  onChange={formik.handleChange}
-                  isInvalid={formik.touched.year && !!formik.errors.year}
+                  formik={formik}
                 />
               </FormControl>
             </HStack>
             <HStack spacing={8}>
               <FormControl>
                 <FormLabel>Género</FormLabel>
-                <Input
+                <FormikInput
                   name="genre"
+                  type="text"
                   placeholder="Género"
-                  value={formik.values.genre}
-                  onChange={formik.handleChange}
-                  isInvalid={formik.touched.genre && !!formik.errors.genre}
+                  formik={formik}
                 />
               </FormControl>
               <FormControl>
                 <FormLabel>Duración</FormLabel>
-                <Input
+                <FormikInput
                   name="duration"
                   type="number"
                   placeholder="Duración"
-                  value={formik.values.duration}
-                  onChange={formik.handleChange}
-                  isInvalid={
-                    formik.touched.duration && !!formik.errors.duration
-                  }
+                  formik={formik}
                 />
               </FormControl>
             </HStack>
