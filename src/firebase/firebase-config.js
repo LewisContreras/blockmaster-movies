@@ -3,7 +3,7 @@ import "firebase/firestore"
 import "firebase/auth"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB9S_iSvgObdK4pSzInpBh8tADyQMKXV28",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "blockmaster-199804.firebaseapp.com",
     projectId: "blockmaster-199804",
     storageBucket: "blockmaster-199804.appspot.com",
