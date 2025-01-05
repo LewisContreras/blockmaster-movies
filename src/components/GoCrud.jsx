@@ -20,4 +20,4 @@ const GoCrud = () => {
   );
 };
 
-export default GoCrud;
+export { GoCrud };

@@ -12,7 +12,7 @@ export const AdminRoute = ({
     return (
         <Route { ...rest }
             component={ (props) => (
-                ( isAuthenticated && uid === "Th1NLjQWVLao0xs1jr0yxbMvKE23" )
+                ( isAuthenticated && uid === process.env.REACT_APP_ADMIN_CRUD )
                     ? ( <Component { ...props } /> )
                     : ( <Redirect to="/auth/login" /> )
             )}
