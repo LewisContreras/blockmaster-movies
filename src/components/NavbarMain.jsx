@@ -41,8 +41,8 @@ function NavbarMain() {
       <Img src="https://i.imgur.com/pwIYVhf.png" alt="Logo de Blockmaster" />
       <MenuOptions />
       <SearchInput />
-      <LogoutIcon />
       {uid === process.env.REACT_APP_ADMIN_CRUD && <GoCrud />}
+      <LogoutIcon />
     </Flex>
   );
 }

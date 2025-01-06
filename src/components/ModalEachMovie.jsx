@@ -33,6 +33,7 @@ function ModalEachMovie() {
     <Flex
       className="scene_element scene_element--fadein"
       justifyContent="center"
+      alignItems="center"
       bgColor="rgba(15,14,23,0.9)"
       position="fixed"
       top="0"
@@ -47,14 +48,17 @@ function ModalEachMovie() {
         position="relative"
         spacing="30px"
         maxWidth="700px"
+        h="fit-content"
       >
-        <Img h="330px" width="220px" src={modal.imageUrl} alt="Hard Kill" />
+        <Img h="330px" width="220px" src={modal.imageUrl} alt={modal.nameMovie} />
         <Icon
           onClick={() => dispatch(movieModal(null))}
           cursor="pointer"
           fontSize="30px"
-          top="40px"
+          top="0"
           right="40px"
+          bgColor="red"
+          borderRadius="4px"
           position="absolute"
           as={MdClose}
         />
