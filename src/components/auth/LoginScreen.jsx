@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/button";
-import { Img } from "@chakra-ui/image";
 import { VStack, Text, Center, Box, Link, HStack } from "@chakra-ui/layout";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { FaGoogle } from "react-icons/fa";
 import { Icon } from "@chakra-ui/react";
 import { FormikInput } from "../common/FormikInput";
+import { LogoBlockmaster } from "../common/LogoBlockmaster";
 
 function LoginScreen() {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function LoginScreen() {
     <Center h="100vh">
       <Box borderRadius="10px" p="1px" w="350px" bgColor="brand.primary">
         <Center h="120px" borderRadius="10px 10px 0 0">
-          <Img src="https://i.imgur.com/pwIYVhf.png" alt="Logo de Blockmaster" />
+          <LogoBlockmaster />
         </Center>
           <VStack
           as="form"

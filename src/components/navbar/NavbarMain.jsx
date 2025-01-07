@@ -1,4 +1,3 @@
-import { Img } from "@chakra-ui/image";
 import { Flex } from "@chakra-ui/layout";
 import React from "react";
 import { useEffect } from "react";
@@ -9,6 +8,7 @@ import { MenuOptions } from "./MenuOptions";
 import { LogoutIcon } from "./LogoutIcon";
 import { SearchInput } from "./SearchInput";
 import { GoCrud } from "./GoCrud";
+import { LogoBlockmaster } from "../common/LogoBlockmaster";
 
 function NavbarMain() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function NavbarMain() {
       alignItems="center"
       gap="4"
     >
-      <Img src="https://i.imgur.com/pwIYVhf.png" alt="Logo de Blockmaster" />
+      <LogoBlockmaster />
       <MenuOptions />
       <SearchInput />
       {uid === process.env.REACT_APP_ADMIN_CRUD && <GoCrud />}

@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/button";
-import { Img } from "@chakra-ui/image";
 import { Center, Box, Text, VStack, Link } from "@chakra-ui/layout";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -9,6 +8,7 @@ import * as Yup from "yup";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import "../../styles/animations.css";
 import { FormikInput } from "../common/FormikInput";
+import { LogoBlockmaster } from "../common/LogoBlockmaster";
 
 function RegisterScreen() {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function RegisterScreen() {
         p="1px"
       >
         <Center h="120px" borderRadius="10px 10px 0 0">
-          <Img src="https://i.imgur.com/pwIYVhf.png" />
+          <LogoBlockmaster />
         </Center>
         <VStack
           as="form"
