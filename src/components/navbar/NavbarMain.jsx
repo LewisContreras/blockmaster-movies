@@ -4,7 +4,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { movieSearch, startMovieSelected } from "../actions/moviesActions";
+import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
 import { MenuOptions } from "./MenuOptions";
 import { LogoutIcon } from "./LogoutIcon";
 import { SearchInput } from "./SearchInput";

@@ -1,7 +1,7 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
-import { movieLastDoc, movieSearch, startMovieSelected } from "../actions/moviesActions";
+import { movieLastDoc, movieSearch, startMovieSelected } from "../../actions/moviesActions";
 
 const menuOptionsList = ["Todas", "Más valoradas", "Menos valoradas"];
 

@@ -6,9 +6,9 @@ import React from "react";
 import { FaPlay, FaPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { movieModal } from "../actions/moviesActions";
-import { db } from "../firebase/firebase-config";
-import "../styles/animations.css";
+import { movieModal } from "../../actions/moviesActions";
+import { db } from "../../firebase/firebase-config";
+import "../../styles/animations.css";
 import Swal from "sweetalert2";
 
 function ModalEachMovie() {

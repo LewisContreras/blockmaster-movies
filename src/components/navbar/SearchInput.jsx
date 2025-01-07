@@ -6,7 +6,7 @@ import {
   movieLastDoc,
   movieSearch,
   startMovieSelected,
-} from "../actions/moviesActions";
+} from "../../actions/moviesActions";
 
 const SearchInput = () => {
   const inputRef = useRef("");

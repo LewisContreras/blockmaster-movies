@@ -1,7 +1,7 @@
 import React from "react";
 import { GiExitDoor } from "react-icons/gi";
 import { useDispatch} from "react-redux";
-import { startLogout } from "../actions/auth";
+import { startLogout } from "../../actions/auth";
 import { Icon } from "@chakra-ui/react";
 
 

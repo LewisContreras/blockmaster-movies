@@ -7,8 +7,8 @@ import { Button } from "@chakra-ui/button";
 import { HStack, Box } from "@chakra-ui/layout";
 import { FaPlay, FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { movieTrailer } from "../actions/moviesActions";
-import { sliderImages } from "../localData/sliderImages";
+import { movieTrailer } from "../../actions/moviesActions";
+import { sliderImages } from "../../localData/sliderImages";
 
 SwiperCore.use([Navigation, Pagination]);
 

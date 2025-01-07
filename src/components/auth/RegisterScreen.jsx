@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import "../../styles/animations.css";
-import { FormikInput } from "../FormikInput";
+import { FormikInput } from "../common/FormikInput";
 
 function RegisterScreen() {
   const dispatch = useDispatch();

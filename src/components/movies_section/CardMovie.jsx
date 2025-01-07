@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import Icon from "@chakra-ui/icon";
 import { Center, Text, Box } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
-import { movieModal } from "../actions/moviesActions";
+import { movieModal } from "../../actions/moviesActions";
 
 const CardMovie = ({ movie }) => {
   const dispatch = useDispatch();

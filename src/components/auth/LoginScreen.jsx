@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { FaGoogle } from "react-icons/fa";
 import { Icon } from "@chakra-ui/react";
-import { FormikInput } from "../FormikInput";
+import { FormikInput } from "../common/FormikInput";
 
 function LoginScreen() {
   const dispatch = useDispatch();

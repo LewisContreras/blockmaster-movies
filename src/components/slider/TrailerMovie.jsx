@@ -2,8 +2,8 @@ import { Box, Center, Icon } from "@chakra-ui/react";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { movieTrailer } from "../actions/moviesActions";
-import "../styles/animations.css";
+import { movieTrailer } from "../../actions/moviesActions";
+import "../../styles/animations.css";
 
 const TrailerMovie = () => {
   const dispatch = useDispatch();

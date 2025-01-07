@@ -16,7 +16,7 @@ import {
 import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { crudSearch } from "../../actions/crudActions";
-import { FormikInput } from "../FormikInput";
+import { FormikInput } from "../common/FormikInput";
 
 const CardCrudPresenter = ({ formik, handleNewImage, handleDelete }) => {
   const dispatch = useDispatch();

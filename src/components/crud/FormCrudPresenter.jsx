@@ -11,7 +11,7 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import { FormError } from "../FormError";
+import { FormError } from "../common/FormError";
 
 const FormCrudPresenter = ({ formik, handleReset, handleImage }) => {
   return (

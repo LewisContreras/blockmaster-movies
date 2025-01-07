@@ -2,7 +2,7 @@ import { Grid } from "@chakra-ui/layout";
 import React from "react";
 import { useSelector } from "react-redux";
 import NothingFound from "./NothingFound.jsx";
-import "../styles/animations.css";
+import "../../styles/animations.css";
 import { CardMovie } from "./CardMovie.jsx";
 
 function CardsContainer() {
