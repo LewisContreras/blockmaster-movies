@@ -12,10 +12,12 @@ export const startMovieSelected = (categorie) => {
   return async (dispatch, getState) => {
     const last = getState().movies.last;
     const selected = getState().movies.selected;
+    const uid = getState().auth.uid;
     const { movies, last: lasted } = await goSearchMovies(
       categorie,
       selected,
-      last
+      last,
+      uid
     );
 
     dispatch(movieLastDoc(lasted));

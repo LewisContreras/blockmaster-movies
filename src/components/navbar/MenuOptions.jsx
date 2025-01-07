@@ -3,7 +3,7 @@ import { HStack, Text } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
 import { movieLastDoc, movieSearch, startMovieSelected } from "../../actions/moviesActions";
 
-const menuOptionsList = ["Todas", "Más valoradas", "Menos valoradas"];
+const menuOptionsList = ["Todas", "Más valoradas", "Ver después"];
 
 const MenuOptions = () => {
     const dispatch = useDispatch();

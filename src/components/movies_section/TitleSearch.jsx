@@ -10,9 +10,12 @@ const TitleSearch = () => {
     textSearch = "";
   } else if (search === "Todas") {
     textSearch = search + " las películas";
-  } else if (search === "Más valoradas" || search === "Menos valoradas") {
+  } else if (search === "Más valoradas") {
     textSearch = "Películas " + search.toLowerCase();
-  } else {
+  } else if (search === "Ver después") {
+    textSearch = "Películas para " + search.toLowerCase();
+  }
+  else {
     textSearch = `"${search}"`;
   }
 
