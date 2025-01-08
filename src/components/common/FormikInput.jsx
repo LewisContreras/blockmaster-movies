@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@chakra-ui/input";
 import { FormError } from "./FormError";
 
-const FormikInput = ({ name, type, placeholder, formik }) => {
+const FormikInput = ({ name, type, placeholder, formik, ...rest }) => {
   return (
     <>
       <Input
@@ -16,6 +16,7 @@ const FormikInput = ({ name, type, placeholder, formik }) => {
         isInvalid={
           formik.touched[name] && !!formik.errors[name]
         }
+        {...rest}
       />
       <FormError error={formik.errors[name]} />
     </>

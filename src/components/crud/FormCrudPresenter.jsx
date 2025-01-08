@@ -12,6 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FormError } from "../common/FormError";
+import { FormikInput } from "../common/FormikInput";
 
 const FormCrudPresenter = ({ formik, handleReset, handleImage }) => {
   return (
@@ -36,19 +37,19 @@ const FormCrudPresenter = ({ formik, handleReset, handleImage }) => {
           <VStack spacing="20px">
             <FormControl id="movie-name">
               <FormLabel>Nombre *</FormLabel>
-              <Input
-                type="text"
+              <FormikInput
                 name="nameMovie"
-                value={formik.values.nameMovie}
-                onChange={formik.handleChange}
+                type="text"
+                placeholder="Nombre de la pelicula"
+                formik={formik}
               />
-              <FormError error={formik.errors.nameMovie} />
             </FormControl>
             <FormControl id="movie-description">
               <FormLabel>Descripción *</FormLabel>
               <Textarea
                 height="fit-content"
                 name="description"
+                borderColor="brand.primary"
                 value={formik.values.description}
                 onChange={formik.handleChange}
               ></Textarea>
@@ -56,50 +57,51 @@ const FormCrudPresenter = ({ formik, handleReset, handleImage }) => {
             </FormControl>
             <FormControl id="movie-genre">
               <FormLabel>Género *</FormLabel>
-              <Input
-                type="text"
+              <FormikInput
                 name="genre"
-                value={formik.values.genre}
-                onChange={formik.handleChange}
+                type="text"
+                placeholder="Género"
+                formik={formik}
               />
-              <FormError error={formik.errors.genre} />
             </FormControl>
             <FormControl id="movie-image">
               <FormLabel>Imagen *</FormLabel>
-              <Input type="file" name="duration" onChange={handleImage} />
+              <Input
+                type="file"
+                borderColor="brand.primary"
+                name="duration"
+                onChange={handleImage}
+              />
               <FormError error={formik.errors.imageUrl} />
             </FormControl>
             <HStack alignItems="start" spacing="20px">
               <FormControl id="movie-year">
                 <FormLabel>Año *</FormLabel>
-                <Input
-                  type="number"
+                <FormikInput
                   name="year"
-                  value={formik.values.year}
-                  onChange={formik.handleChange}
+                  type="number"
+                  placeholder="Año"
+                  formik={formik}
                 />
-                <FormError error={formik.errors.year} />
               </FormControl>
               <FormControl id="movie-calification">
                 <FormLabel>Calificación *</FormLabel>
-                <Input
-                  type="number"
-                  step="0.1"
+                <FormikInput
                   name="calification"
-                  value={formik.values.calification}
-                  onChange={formik.handleChange}
+                  type="number"
+                  placeholder="Calificación"
+                  formik={formik}
+                  step="0.1"
                 />
-                <FormError error={formik.errors.calification} />
               </FormControl>
               <FormControl id="movie-duration">
                 <FormLabel>Duración *</FormLabel>
-                <Input
-                  type="number"
+                <FormikInput
                   name="duration"
-                  value={formik.values.duration}
-                  onChange={formik.handleChange}
+                  type="number"
+                  placeholder="Duración"
+                  formik={formik}
                 />
-                <FormError error={formik.errors.duration} />
               </FormControl>
             </HStack>
             <Button type="submit" bgColor="blackAlpha.600" width="60%">
