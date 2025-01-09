@@ -3,23 +3,27 @@ import { db } from "../firebase/firebase-config";
 export const goSearchMovies = async (category, selected, last, uid) => {
   let movies = [...selected];
   let newLast = last;
+  let hasEnded = false;
 
   if (category === "Todas") {
     await db
       .collection("movies")
       .orderBy("nameMovie")
-      .startAfter(last || 0) // Start after the last document
-      .limit(10) // Fetch only 10 movies
+      .startAfter(last || 0)
+      .limit(10)
       .get()
       .then((snap) => {
+        console.log("snap", snap);
         if (!snap.empty) {
-          newLast = snap.docs[snap.docs.length - 1]; // Update the last document reference
+          newLast = snap.docs[snap.docs.length - 1];
           snap.forEach((doc) => {
             movies.push({
               id: doc.id,
               ...doc.data(),
             });
           });
+        } else {
+          hasEnded = true;
         }
       })
       .catch((err) => console.log(err));
@@ -72,5 +76,6 @@ export const goSearchMovies = async (category, selected, last, uid) => {
   return {
     movies: movies,
     last: newLast,
+    isEnd: hasEnded,
   };
 };

@@ -5,7 +5,8 @@ import { types } from "../types/types";
     selected:[],
     modal: null,
     last : null,
-    trailer : null
+    trailer : null,
+    isEnd : false
 } 
 
 export const moviesReducer = (state = initialState , action) => {
@@ -38,6 +39,12 @@ export const moviesReducer = (state = initialState , action) => {
             return {
                 ...state,
                 trailer: action.payload
+            }
+
+        case types.mvIsEnd:
+            return {
+                ...state,
+                isEnd: action.payload
             }
 
         default:

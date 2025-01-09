@@ -10,18 +10,17 @@ export const movieSearch = (categorie) => {
 
 export const startMovieSelected = (categorie) => {
   return async (dispatch, getState) => {
-    const last = getState().movies.last;
-    const selected = getState().movies.selected;
+    const { selected, last, isEnd } = getState().movies;
     const uid = getState().auth.uid;
-    const { movies, last: lasted } = await goSearchMovies(
+    if (isEnd) return;
+    const { movies, last: lasted, isEnd: hasEnded } = await goSearchMovies(
       categorie,
       selected,
       last,
       uid
     );
-
+    dispatch(movieIsEnd(hasEnded));
     dispatch(movieLastDoc(lasted));
-
     dispatch(movieSelected(movies));
   };
 };
@@ -51,5 +50,12 @@ export const movieTrailer = (movie) => {
   return {
     type: types.mvTrailer,
     payload: movie,
+  };
+};
+
+export const movieIsEnd = (isEnd) => {
+  return {
+    type: types.mvIsEnd,
+    payload: isEnd,
   };
 };
