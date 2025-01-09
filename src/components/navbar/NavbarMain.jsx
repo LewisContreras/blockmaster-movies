@@ -1,9 +1,6 @@
 import { Flex } from "@chakra-ui/layout";
 import React from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
+import { useSelector } from "react-redux";
 import { MenuOptions } from "./MenuOptions";
 import { LogoutIcon } from "./LogoutIcon";
 import { SearchInput } from "./SearchInput";
@@ -11,18 +8,7 @@ import { GoCrud } from "./GoCrud";
 import { LogoBlockmaster } from "../common/LogoBlockmaster";
 
 function NavbarMain() {
-  const dispatch = useDispatch();
-  const search = useSelector((state) => state.movies.search);
   const uid = useSelector((state) => state.auth.uid);
-  const mounted = useRef(false);
-
-  useEffect(() => {
-    if (!mounted.current) {
-      dispatch(movieSearch(search));
-      dispatch(startMovieSelected(search));
-      mounted.current = true;
-    }
-  }, [dispatch, search]);
 
   return (
     <Flex

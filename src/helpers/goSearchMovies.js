@@ -2,22 +2,25 @@ import { db } from "../firebase/firebase-config";
 
 export const goSearchMovies = async (category, selected, last, uid) => {
   let movies = [...selected];
-  if (category === "Todas") {
-    movies = [];
+  let newLast = last;
 
+  if (category === "Todas") {
     await db
       .collection("movies")
       .orderBy("nameMovie")
+      .startAfter(last || 0) // Start after the last document
+      .limit(10) // Fetch only 10 movies
       .get()
       .then((snap) => {
-        last = snap.docs[snap.docs.length - 1].id;
-
-        snap.forEach((hijo) => {
-          movies.push({
-            id: hijo.id,
-            ...hijo.data(),
+        if (!snap.empty) {
+          newLast = snap.docs[snap.docs.length - 1]; // Update the last document reference
+          snap.forEach((doc) => {
+            movies.push({
+              id: doc.id,
+              ...doc.data(),
+            });
           });
-        });
+        }
       })
       .catch((err) => console.log(err));
   } else if (category === "Más valoradas") {
@@ -68,6 +71,6 @@ export const goSearchMovies = async (category, selected, last, uid) => {
   }
   return {
     movies: movies,
-    last: last,
+    last: newLast,
   };
 };

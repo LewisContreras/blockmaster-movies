@@ -1,11 +1,11 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import { FaStar } from "react-icons/fa";
 import Icon from "@chakra-ui/icon";
 import { Center, Text, Box } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
 import { movieModal } from "../../actions/moviesActions";
 
-const CardMovie = ({ movie }) => {
+const CardMovie = forwardRef(({ movie }, ref) => {
   const dispatch = useDispatch();
 
   const handleClickModal = (movie) => {
@@ -22,6 +22,7 @@ const CardMovie = ({ movie }) => {
       backgroundImage={movie.imageUrl}
       w={["150px", "220px"]}
       h={["225px", "330px"]}
+      ref={ref}
     >
       <Center
         bgColor="rgba(0,0,0,0.5)"
@@ -40,6 +41,6 @@ const CardMovie = ({ movie }) => {
       </Center>
     </Box>
   );
-};
+});
 
 export { CardMovie };

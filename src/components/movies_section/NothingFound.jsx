@@ -14,4 +14,4 @@ function NothingFound() {
   );
 }
 
-export default NothingFound;
+export { NothingFound };
