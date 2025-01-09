@@ -1,18 +1,18 @@
 import { types } from "../types/types";
 import { googleAuthProvider, firebase } from "../firebase/firebase-config";
-import { startLoading, finishLoading, setError } from "./uiActions";
+import { startLoading, finishLoading, setError, removeError } from "./uiActions";
 
 export const startLoginEmailPassword = (email, password) => {
   return async (dispatch) => {
-    dispatch(startLoading()); // Start loading state
+    dispatch(startLoading());
     try {
       const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
       dispatch(login(user.uid, user.displayName));
+      dispatch(removeError());
     } catch (e) {
-      console.error("Error logging in:", e);
-      dispatch(setError(e.message)); // Set the error state
+      dispatch(setError(e.code));
     } finally {
-      dispatch(finishLoading()); // Finish loading state
+      dispatch(finishLoading());
     }
   };
 };
@@ -23,9 +23,9 @@ export const startGoogleLogin = () => {
     try {
       const { user } = await firebase.auth().signInWithPopup(googleAuthProvider);
       dispatch(login(user.uid, user.displayName));
+      dispatch(removeError());
     } catch (e) {
-      console.error("Error with Google login:", e);
-      dispatch(setError(e.message)); // Handle Google login errors
+      dispatch(setError(e.code));
     } finally {
       dispatch(finishLoading());
     }
@@ -39,9 +39,9 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
       const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
       await user.updateProfile({ displayName: name });
       dispatch(login(user.uid, user.displayName));
+      dispatch(removeError());
     } catch (e) {
-      console.error("Error registering user:", e);
-      dispatch(setError(e.message)); // Handle registration errors
+      dispatch(setError(e.code));
     } finally {
       dispatch(finishLoading());
     }
@@ -54,9 +54,9 @@ export const startLogout = () => {
     try {
       await firebase.auth().signOut();
       dispatch(logout());
+      dispatch(removeError());
     } catch (e) {
-      console.error("Error logging out:", e);
-      dispatch(setError(e.message)); // Handle logout errors
+      dispatch(setError(e.code));
     } finally {
       dispatch(finishLoading());
     }

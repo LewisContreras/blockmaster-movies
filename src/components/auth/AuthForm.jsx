@@ -3,8 +3,12 @@ import { LogoBlockmaster } from "../common/LogoBlockmaster";
 import { Center, Box, Button } from "@chakra-ui/react";
 import { LoginScreen } from "./LoginScreen";
 import { RegisterScreen } from "./RegisterScreen";
+import { ErrorMessage } from "../common/ErrorMessage";
+import { useDispatch } from "react-redux";
+import { removeError } from "../../actions/uiActions";
 
 const AuthForm = () => {
+  const dispatch = useDispatch();
   const [login, setLogin] = useState(true);
   return (
     <Center h="100vh">
@@ -20,13 +24,19 @@ const AuthForm = () => {
           spacing="15px"
           bgColor="#14112e"
         >
-          {login ? (
-            <LoginScreen />
-          ) : (
-            <RegisterScreen  />
-          )}
-          <Button _focus={{border: "none"}} mt="10px" w="100%" variant="link" onClick={() => setLogin(!login)}>
-            {login ? "¿Ya estás registrado?" : "¿No estás registrado?"}
+          <ErrorMessage />
+          {login ? <LoginScreen /> : <RegisterScreen />}
+          <Button
+            _focus={{ border: "none" }}
+            mt="10px"
+            w="100%"
+            variant="link"
+            onClick={() => {
+              setLogin(!login);
+              dispatch(removeError());
+            }}
+          >
+            {login ? "¿No estás registrado?" : "¿Ya estás registrado?"}
           </Button>
         </Box>
       </Box>

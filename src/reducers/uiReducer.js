@@ -3,7 +3,7 @@ import { types } from "../types/types";
 
 const initialState={
     loading:false,
-    msjError: null
+    msgError: null
 }
 
 export const registro = (state=initialState, action)=>{
@@ -11,13 +11,13 @@ export const registro = (state=initialState, action)=>{
         case types.uiSetError:
             return{
                 ...state,
-                msjError:action.payload
+                msgError:action.payload
             }
         
         case types.uiRemoveError:
             return{
                 ...state,
-                msjError:null
+                msgError:null
             }
         
         case types.uiStartLoading:
