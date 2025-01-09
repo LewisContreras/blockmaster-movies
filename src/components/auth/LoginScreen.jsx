@@ -9,7 +9,7 @@ import { FaGoogle } from "react-icons/fa";
 import { Icon } from "@chakra-ui/react";
 import { FormikInput } from "../common/FormikInput";
 
-function LoginScreen({setLogin}) {
+function LoginScreen() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.ui);
 
@@ -37,13 +37,9 @@ function LoginScreen({setLogin}) {
   return (
     <VStack
       as="form"
-      onSubmit={formik.handleSubmit}
       className="scene_element scene_element--clipmidup"
-      p="10px"
-      h="340px"
-      borderRadius="0 0 10px 10px"
+      onSubmit={formik.handleSubmit}
       spacing="15px"
-      bgColor="#14112e"
     >
       <Text my="10px" fontWeight="600" fontSize="xl">
         Ingresa con correo y contraseña
@@ -81,10 +77,7 @@ function LoginScreen({setLogin}) {
         <Text fontWeight="600" textAlign="center" width="100%" color="black">
           Ingresa con Google
         </Text>
-      </HStack>
-      <Button variant="link" onClick={() => setLogin(false)}>
-        ¿No estás registrado?
-      </Button>
+      </HStack>    
     </VStack>
   );
 }

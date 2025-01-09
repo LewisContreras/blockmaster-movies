@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LogoBlockmaster } from "../common/LogoBlockmaster";
-import { Center, Box } from "@chakra-ui/react";
+import { Center, Box, Button } from "@chakra-ui/react";
 import { LoginScreen } from "./LoginScreen";
 import { RegisterScreen } from "./RegisterScreen";
 
@@ -15,16 +15,19 @@ const AuthForm = () => {
         <Box
           className="scene_element scene_element--clipmidup"
           p="10px"
-          minH="340px"
+          minH="320px"
           borderRadius="0 0 10px 10px"
           spacing="15px"
           bgColor="#14112e"
         >
           {login ? (
-            <LoginScreen setLogin={setLogin} />
+            <LoginScreen />
           ) : (
-            <RegisterScreen setLogin={setLogin} />
+            <RegisterScreen  />
           )}
+          <Button _focus={{border: "none"}} mt="10px" w="100%" variant="link" onClick={() => setLogin(!login)}>
+            {login ? "¿Ya estás registrado?" : "¿No estás registrado?"}
+          </Button>
         </Box>
       </Box>
     </Center>

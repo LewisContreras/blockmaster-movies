@@ -8,7 +8,7 @@ import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 import "../../styles/animations.css";
 import { FormikInput } from "../common/FormikInput";
 
-function RegisterScreen({setLogin}) {
+function RegisterScreen() {
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -37,8 +37,8 @@ function RegisterScreen({setLogin}) {
   return (
         <VStack
           as="form"
-          onSubmit={formik.handleSubmit}
           className="scene_element scene_element--clipmidup"
+          onSubmit={formik.handleSubmit}
           spacing="10px"
         >
           <Text fontSize="xl" fontWeight="600">
@@ -50,9 +50,6 @@ function RegisterScreen({setLogin}) {
           <FormikInput name="password2" type="password" placeholder="Confirm Password" formik={formik} />
           <Button type="submit" bgColor="#3C5EEA">
             Entrar
-          </Button>
-          <Button variant="link" onClick={() => setLogin(true)} >
-            ¿Ya estás registrado?
           </Button>
         </VStack>
   );
