@@ -13,12 +13,10 @@ const FormikInput = ({ name, type, placeholder, formik, ...rest }) => {
         value={formik.values[name]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        isInvalid={
-          formik.touched[name] && !!formik.errors[name]
-        }
+        isInvalid={formik.touched[name] && !!formik.errors[name]}
         {...rest}
       />
-      <FormError error={formik.errors[name]} />
+      <FormError error={formik.errors[name]} touched={formik.touched[name]} />
     </>
   );
 };
