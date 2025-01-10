@@ -39,6 +39,7 @@ const TrailerMovie = () => {
         width="80%"
         height={["200px", "300px", "400px", "80%"]}
         allowFullScreen={true}
+        allow="autoplay"
       ></Box>
     </Center>
   );

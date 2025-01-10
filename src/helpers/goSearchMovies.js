@@ -13,7 +13,6 @@ export const goSearchMovies = async (category, selected, last, uid) => {
       .limit(10)
       .get()
       .then((snap) => {
-        console.log("snap", snap);
         if (!snap.empty) {
           newLast = snap.docs[snap.docs.length - 1];
           snap.forEach((doc) => {
