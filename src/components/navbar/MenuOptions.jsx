@@ -6,10 +6,12 @@ import { movieLastDoc, movieSearch, startMovieSelected } from "../../actions/mov
 const menuOptionsList = ["Todas", "Más valoradas", "Ver después"];
 
 const MenuOptions = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleClickCategories = (e) => {
     let contenido = e.target.textContent;
-    dispatch(movieLastDoc(null));
+    if (contenido !== "Todas") {
+      dispatch(movieLastDoc(null));
+    }
     dispatch(movieSearch(contenido));
     dispatch(startMovieSelected(contenido));
     window.scrollTo({
