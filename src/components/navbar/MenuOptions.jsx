@@ -1,7 +1,7 @@
 import React from "react";
 import { HStack, Text } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
-import { movieLastDoc, movieSearch, startMovieSelected } from "../../actions/moviesActions";
+import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
 
 const menuOptionsList = ["Todas", "Más valoradas", "Ver después"];
 
@@ -9,9 +9,6 @@ const MenuOptions = () => {
   const dispatch = useDispatch();
   const handleClickCategories = (e) => {
     let contenido = e.target.textContent;
-    if (contenido !== "Todas") {
-      dispatch(movieLastDoc(null));
-    }
     dispatch(movieSearch(contenido));
     dispatch(startMovieSelected(contenido));
     window.scrollTo({

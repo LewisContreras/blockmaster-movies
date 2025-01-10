@@ -1,32 +1,39 @@
 import { db } from "../firebase/firebase-config";
 
-export const goSearchMovies = async (category, selected, last, uid) => {
+export const getAllMovies = async (selected, last) => {
   let movies = [...selected];
   let newLast = last;
   let hasEnded = false;
-
-  if (category === "Todas") {
-    await db
-      .collection("movies")
-      .orderBy("nameMovie")
-      .startAfter(last || 0)
-      .limit(10)
-      .get()
-      .then((snap) => {
-        if (!snap.empty) {
-          newLast = snap.docs[snap.docs.length - 1];
-          snap.forEach((doc) => {
-            movies.push({
-              id: doc.id,
-              ...doc.data(),
-            });
+  await db
+    .collection("movies")
+    .orderBy("nameMovie")
+    .startAfter(last || 0)
+    .limit(10)
+    .get()
+    .then((snap) => {
+      if (!snap.empty) {
+        newLast = snap.docs[snap.docs.length - 1];
+        snap.forEach((doc) => {
+          movies.push({
+            id: doc.id,
+            ...doc.data(),
           });
-        } else {
-          hasEnded = true;
-        }
-      })
-      .catch((err) => console.log(err));
-  } else if (category === "Más valoradas") {
+        });
+      } else {
+        hasEnded = true;
+      }
+    })
+    .catch((err) => console.log(err));
+  return {
+    movies: movies,
+    last: newLast,
+    isEnd: hasEnded,
+  };
+};
+
+export const goSearchMovies = async (category, selected, uid) => {
+  let movies = [...selected];
+  if (category === "Más valoradas") {
     movies = [];
     await db
       .collection("movies")
@@ -72,9 +79,5 @@ export const goSearchMovies = async (category, selected, last, uid) => {
       })
       .catch((err) => console.log(err));
   }
-  return {
-    movies: movies,
-    last: newLast,
-    isEnd: hasEnded,
-  };
+  return movies;
 };

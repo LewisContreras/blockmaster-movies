@@ -3,10 +3,13 @@ import { types } from "../types/types";
  const initialState = {
     search:"Todas",
     selected:[],
+    allMovies: {
+        movies: [],
+        isEnd: false,
+        last: null
+    },
     modal: null,
-    last : null,
     trailer : null,
-    isEnd : false
 } 
 
 export const moviesReducer = (state = initialState , action) => {
@@ -15,6 +18,12 @@ export const moviesReducer = (state = initialState , action) => {
             return {
                 ...state,
                 selected: action.payload
+            }
+        
+        case types.mvGetAll:
+            return {
+                ...state,
+                allMovies: action.payload
             }
         
         case types.mvSearch:
@@ -29,22 +38,10 @@ export const moviesReducer = (state = initialState , action) => {
                 modal: action.payload
             }
         
-        case types.mvLastDoc:
-            return {
-                ...state,
-                last: action.payload
-            }
-        
         case types.mvTrailer:
             return {
                 ...state,
                 trailer: action.payload
-            }
-
-        case types.mvIsEnd:
-            return {
-                ...state,
-                isEnd: action.payload
             }
 
         default:

@@ -8,8 +8,9 @@ import { CardMovie } from "./CardMovie";
 function CardsContainer() {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.movies.search);
-  const selectedMovies = useSelector((state) => state.movies.selected);
-  const lastDoc = useSelector((state) => state.movies.last);
+  const selected = useSelector((state) => state.movies.selected);
+  const allMovies = useSelector((state) => state.movies.allMovies.movies);
+  const moviesToDisplay = search === "Todas" ? allMovies : selected;
   const mounted = useRef(false);
   const observer = useRef();
 
@@ -23,9 +24,9 @@ function CardsContainer() {
 
   const fetchMoreMovies = useCallback(() => {
     if (search === "Todas") {
-      dispatch(startMovieSelected(search, lastDoc));
+      dispatch(startMovieSelected(search));
     }
-  }, [dispatch, search, lastDoc]);
+  }, [dispatch, search]);
 
   const lastMovieRef = useCallback(
     (node) => {
@@ -40,7 +41,7 @@ function CardsContainer() {
     [fetchMoreMovies]
   );
 
-  return !selectedMovies.length ? (
+  return !moviesToDisplay.length ? (
     <NothingFound />
   ) : (
     <Grid
@@ -52,8 +53,8 @@ function CardsContainer() {
       mt="20px"
       justifyContent={["space-evenly", "space-between"]}
     >
-      {selectedMovies.map((el, index) => {
-        if (index === selectedMovies.length - 1) {
+      {moviesToDisplay.map((el, index) => {
+        if (index === moviesToDisplay.length - 1) {
           return <CardMovie ref={lastMovieRef} key={el.id} movie={el} />;
         } else {
           return <CardMovie key={el.id} movie={el} />;

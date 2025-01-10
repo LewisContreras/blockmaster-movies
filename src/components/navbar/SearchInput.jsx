@@ -3,7 +3,6 @@ import { InputGroup, InputRightElement, Input } from "@chakra-ui/input";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import {
-  movieLastDoc,
   movieSearch,
   startMovieSelected,
 } from "../../actions/moviesActions";
@@ -14,7 +13,6 @@ const SearchInput = () => {
 
   const handleSearch = () => {
     let valueInput = inputRef.current.value;
-    dispatch(movieLastDoc(null));
     dispatch(movieSearch(valueInput));
     dispatch(startMovieSelected(valueInput));
     window.scrollTo({

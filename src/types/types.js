@@ -9,6 +9,7 @@ export const types = {
     uiFinishLoadig: "[UI] finish loading",
 
     mvSelected: "[MV] movie selected",
+    mvGetAll: "[MV] get all movies",
     mvSearch: "[MV] movie to search",
     mvModal: "[MV] movie modal",
     mvLastDoc : "[MV] last query movie",

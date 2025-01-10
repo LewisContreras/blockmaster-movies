@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { goSearchMovies } from "../helpers/goSearchMovies";
+import { goSearchMovies, getAllMovies } from "../helpers/goSearchMovies";
 
 export const movieSearch = (categorie) => {
   return {
@@ -8,20 +8,19 @@ export const movieSearch = (categorie) => {
   };
 };
 
-export const startMovieSelected = (categorie) => {
+export const startMovieSelected = (category) => {
   return async (dispatch, getState) => {
-    const { selected, last, isEnd } = getState().movies;
+    const { selected } = getState().movies;
+    const { movies, last, isEnd } = getState().movies.allMovies;
     const uid = getState().auth.uid;
-    if (isEnd) return;
-    const { movies, last: lasted, isEnd: hasEnded } = await goSearchMovies(
-      categorie,
-      selected,
-      last,
-      uid
-    );
-    dispatch(movieIsEnd(hasEnded));
-    dispatch(movieLastDoc(lasted));
-    dispatch(movieSelected(movies));
+    if (category === "Todas") {
+      if (isEnd) return;
+      const moviesInfo = await getAllMovies(movies, last);
+      dispatch(movieGetAll(moviesInfo));
+    } else {
+      const movies = await goSearchMovies(category, selected, uid);
+      dispatch(movieSelected(movies));
+    }
   };
 };
 
@@ -39,13 +38,6 @@ export const movieModal = (movie) => {
   };
 };
 
-export const movieLastDoc = (doc) => {
-  return {
-    type: types.mvLastDoc,
-    payload: doc,
-  };
-};
-
 export const movieTrailer = (movie) => {
   return {
     type: types.mvTrailer,
@@ -53,9 +45,9 @@ export const movieTrailer = (movie) => {
   };
 };
 
-export const movieIsEnd = (isEnd) => {
+export const movieGetAll = (movies) => {
   return {
-    type: types.mvIsEnd,
-    payload: isEnd,
+    type: types.mvGetAll,
+    payload: movies,
   };
 };
