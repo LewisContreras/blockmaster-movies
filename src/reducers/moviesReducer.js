@@ -8,6 +8,8 @@ import { types } from "../types/types";
         isEnd: false,
         last: null
     },
+    watchLater: [],
+    mostValued: [],
     modal: null,
     trailer : null,
 } 
@@ -24,6 +26,18 @@ export const moviesReducer = (state = initialState , action) => {
             return {
                 ...state,
                 allMovies: action.payload
+            }
+
+        case types.mvWatchLater:
+            return {
+                ...state,
+                watchLater: action.payload
+            }
+
+        case types.mvMostValued:
+            return {
+                ...state,
+                mostValued: action.payload
             }
         
         case types.mvSearch:

@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { goSearchMovies, getAllMovies } from "../helpers/goSearchMovies";
+import { getMovie, getAllMovies, getWatchLater, getMostValued } from "../helpers/goSearchMovies";
 
 export const movieSearch = (categorie) => {
   return {
@@ -10,15 +10,22 @@ export const movieSearch = (categorie) => {
 
 export const startMovieSelected = (category) => {
   return async (dispatch, getState) => {
-    const { selected } = getState().movies;
-    const { movies, last, isEnd } = getState().movies.allMovies;
-    const uid = getState().auth.uid;
     if (category === "Todas") {
+      const { movies, last, isEnd } = getState().movies.allMovies;
       if (isEnd) return;
       const moviesInfo = await getAllMovies(movies, last);
       dispatch(movieGetAll(moviesInfo));
+    } else if (category === "Ver después") {
+      const uid = getState().auth.uid;
+      const movies = await getWatchLater(uid);
+      dispatch(movieWatchLater(movies));
+    } else if (category === "Más valoradas"){
+      const mostValued = getState().movies.mostValued;
+      if (mostValued.length) return;
+      const movies = await getMostValued();
+      dispatch(movieMostValued(movies));
     } else {
-      const movies = await goSearchMovies(category, selected, uid);
+      const movies = await getMovie(category);
       dispatch(movieSelected(movies));
     }
   };
@@ -51,3 +58,17 @@ export const movieGetAll = (movies) => {
     payload: movies,
   };
 };
+
+export const movieWatchLater = (movies) => {
+  return {
+    type: types.mvWatchLater,
+    payload: movies,
+  };
+}
+
+export const movieMostValued = (movies) => {
+  return {
+    type: types.mvMostValued,
+    payload: movies,
+  };
+}

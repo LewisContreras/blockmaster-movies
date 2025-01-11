@@ -31,53 +31,58 @@ export const getAllMovies = async (selected, last) => {
   };
 };
 
-export const goSearchMovies = async (category, selected, uid) => {
-  let movies = [...selected];
-  if (category === "Más valoradas") {
-    movies = [];
-    await db
-      .collection("movies")
-      .where("calification", ">=", 7)
-      .orderBy("calification", "desc")
-      .get()
-      .then((snap) => {
-        snap.forEach((hijo) => {
-          movies.push({
-            id: hijo.id,
-            ...hijo.data(),
-          });
+export const getWatchLater = async (uid) => {
+  let movies = [];
+  await db
+    .collection(`${uid}/movies/verdespues`)
+    .get()
+    .then((snap) => {
+      snap.forEach((doc) => {
+        movies.push({
+          id: doc.id,
+          ...doc.data(),
         });
       });
-  } else if (category === "Ver después") {
-    movies = [];
-    await db
-      .collection(`${uid}/movies/verdespues`)
-      .get()
-      .then((snap) => {
-        snap.forEach((doc) => {
-          movies.push({
-            id: doc.id,
-            ...doc.data(),
-          });
+    })
+    .catch((err) => console.log("Error fetching 'Ver despues' movies:", err));
+  return movies;
+};
+
+export const getMostValued = async () => {
+  let movies = [];
+  await db
+    .collection("movies")
+    .where("calification", ">=", 7)
+    .orderBy("calification", "desc")
+    .get()
+    .then((snap) => {
+      snap.forEach((doc) => {
+        movies.push({
+          id: doc.id,
+          ...doc.data(),
         });
-      })
-      .catch((err) => console.log("Error fetching 'Ver después' movies:", err));
-  } else {
-    movies = [];
-    let nameMovie = category.toUpperCase();
-    await db
-      .collection("movies")
-      .where("nameMovie", "==", nameMovie)
-      .get()
-      .then((snap) => {
-        snap.forEach((hijo) => {
-          movies.push({
-            id: hijo.id,
-            ...hijo.data(),
-          });
+      });
+    })
+    .catch((err) => console.log(err));
+  return movies;
+};
+
+export const getMovie = async (category) => {
+  let movies = [];
+  let nameMovie = category.toUpperCase();
+  await db
+    .collection("movies")
+    .where("nameMovie", "==", nameMovie)
+    .get()
+    .then((snap) => {
+      snap.forEach((hijo) => {
+        movies.push({
+          id: hijo.id,
+          ...hijo.data(),
         });
-      })
-      .catch((err) => console.log(err));
-  }
+      });
+    })
+    .catch((err) => console.log(err));
+
   return movies;
 };

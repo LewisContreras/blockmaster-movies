@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
 import { NothingFound } from "./NothingFound";
 import { CardMovie } from "./CardMovie";
-
+import { useMoviesToDisplay } from "../../hooks/useMoviesToDisplay";
 function CardsContainer() {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.movies.search);
-  const selected = useSelector((state) => state.movies.selected);
-  const allMovies = useSelector((state) => state.movies.allMovies.movies);
-  const moviesToDisplay = search === "Todas" ? allMovies : selected;
+  const moviesToDisplay = useMoviesToDisplay(search, useSelector);
   const mounted = useRef(false);
   const observer = useRef();
 
