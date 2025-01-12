@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useMoviesToDisplay } from "../../hooks/useMoviesToDisplay";
 
 const TitleSearch = () => {
   const search = useSelector((state) => state.movies.search);
-  const selected = useSelector((state) => state.movies.selected);
+  const selected = useMoviesToDisplay(search);
   let textSearch = "";
   if (search === "" || (!!search && !selected.length)) {
     textSearch = "";

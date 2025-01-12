@@ -1,4 +1,5 @@
 import { db } from "../firebase/firebase-config";
+import firebase from "firebase/app";
 
 export const getAllMovies = async (selected, last) => {
   let movies = [...selected];
@@ -32,21 +33,29 @@ export const getAllMovies = async (selected, last) => {
 };
 
 export const getWatchLater = async (uid) => {
-  let movies = [];
-  await db
-    .collection(`${uid}/movies/verdespues`)
-    .get()
-    .then((snap) => {
-      snap.forEach((doc) => {
-        movies.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-    })
-    .catch((err) => console.log("Error fetching 'Ver despues' movies:", err));
-  return movies;
+  try {
+    const snapshot = await db.collection(`${uid}/movies/verdespues`).get();
+    const movieIds = snapshot.docs.map((doc) => doc.data().movieId);
+
+    if (movieIds.length === 0) return [];
+
+    const moviesSnapshot = await db
+      .collection("movies")
+      .where(firebase.firestore.FieldPath.documentId(), "in", movieIds)
+      .get();
+
+    const movies = moviesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return movies;
+  } catch (err) {
+    console.error("Error fetching 'Ver despues' movies:", err);
+    return [];
+  }
 };
+
 
 export const getMostValued = async () => {
   let movies = [];

@@ -17,6 +17,8 @@ export const startMovieSelected = (category) => {
       dispatch(movieGetAll(moviesInfo));
     } else if (category === "Ver después") {
       const uid = getState().auth.uid;
+      const watchLater = getState().movies.watchLater;
+      if (watchLater.length) return;
       const movies = await getWatchLater(uid);
       dispatch(movieWatchLater(movies));
     } else if (category === "Más valoradas"){

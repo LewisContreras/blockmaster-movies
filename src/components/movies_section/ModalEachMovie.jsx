@@ -16,10 +16,8 @@ function ModalEachMovie() {
   const uid = useSelector((state) => state.auth.uid);
   const dispatch = useDispatch();
 
-  const handleSeeAfter = (modal) => {
-    let movie = { ...modal };
-    delete movie.id;
-    db.collection(`${uid}/movies/verdespues`).add(movie);
+  const handleSeeAfter = (movie) => {
+    db.collection(`${uid}/movies/verdespues`).add({ movieId: movie.id });
     Swal.fire({
       icon: "success",
       title: "!Genial!",
@@ -50,7 +48,12 @@ function ModalEachMovie() {
         maxWidth="700px"
         h="fit-content"
       >
-        <Img h="330px" width="220px" src={modal.imageUrl} alt={modal.nameMovie} />
+        <Img
+          h="330px"
+          width="220px"
+          src={modal.imageUrl}
+          alt={modal.nameMovie}
+        />
         <Icon
           onClick={() => dispatch(movieModal(null))}
           cursor="pointer"
