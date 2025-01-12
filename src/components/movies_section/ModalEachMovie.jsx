@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 function ModalEachMovie() {
   const modal = useSelector((state) => state.movies.modal);
   const uid = useSelector((state) => state.auth.uid);
+  const watchLater = useSelector((state) => state.movies.watchLater);
   const dispatch = useDispatch();
 
   const handleSeeAfter = (movie) => {
@@ -24,6 +25,8 @@ function ModalEachMovie() {
       text: "La película ha sido agregada a tu lista",
     });
   };
+
+  const isInWatchLater = watchLater.some((movie) => movie.id === modal?.id);
 
   return !modal ? (
     <Box display="none"></Box>
@@ -82,16 +85,18 @@ function ModalEachMovie() {
             >
               VER AHORA
             </Button>
-            <Button
-              leftIcon={<FaPlus />}
-              border="2px solid"
-              borderColor="brand.primary"
-              color="brand.primary"
-              bgColor="brand.background"
-              onClick={() => handleSeeAfter(modal)}
-            >
-              VER DESPUÉS
-            </Button>
+            {!isInWatchLater && (
+              <Button
+                leftIcon={<FaPlus />}
+                border="2px solid"
+                borderColor="brand.primary"
+                color="brand.primary"
+                bgColor="brand.background"
+                onClick={() => handleSeeAfter(modal)}
+              >
+                VER DESPUÉS
+              </Button>
+            )}
           </HStack>
         </VStack>
       </HStack>
