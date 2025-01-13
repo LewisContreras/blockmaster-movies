@@ -6,62 +6,26 @@ import React from "react";
 import { FaPlay, FaPlus, FaTrash } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { movieModal, movieRemoveWatchLater, movieAddWatchLater } from "../../actions/moviesActions";
-import { db } from "../../firebase/firebase-config";
+import {
+  movieModal,
+  startAddingWatchLater,
+  startRemovingWatchLater,
+} from "../../actions/moviesActions";
 import "../../styles/animations.css";
-import Swal from "sweetalert2";
 
 function ModalEachMovie() {
   const modal = useSelector((state) => state.movies.modal);
-  const uid = useSelector((state) => state.auth.uid);
   const watchLater = useSelector((state) => state.movies.watchLater);
   const dispatch = useDispatch();
 
   const handleSeeAfter = (movie) => {
-    db.collection(`${uid}/movies/verdespues`)
-      .add({ movieId: movie.id })
-      .then((docRef) => {
-        const watchLaterId = docRef.id;
-        dispatch(movieAddWatchLater({ ...movie, watchLaterId }));
-        Swal.fire({
-          icon: "success",
-          title: "!Genial!",
-          text: "La película ha sido agregada a tu lista",
-        });
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "No se pudo agregar la película a tu lista",
-        });
-        console.error("Error adding to Watch Later:", err);
-      });
+    dispatch(startAddingWatchLater(movie));
   };
-  
 
   const isInWatchLater = watchLater.find((movie) => movie.id === modal?.id);
 
   const handleRemoveFromWatchLater = (docId) => {
-    db.collection(`${uid}/movies/verdespues`)
-      .doc(docId)
-      .delete()
-      .then(() => {
-        dispatch(movieRemoveWatchLater(docId));
-        Swal.fire({
-          icon: "success",
-          title: "!Genial!",
-          text: "La película ha sido eliminada de tu lista",
-        });
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "No se pudo eliminar la película de tu lista",
-        });
-        console.error("Error removing from Watch Later:", err);
-      });
+    dispatch(startRemovingWatchLater(docId));
   };
 
   return !modal ? (
@@ -128,7 +92,9 @@ function ModalEachMovie() {
                 borderColor="red"
                 color="red"
                 bgColor="brand.background"
-                onClick={() => handleRemoveFromWatchLater(isInWatchLater.watchLaterId)}
+                onClick={() =>
+                  handleRemoveFromWatchLater(isInWatchLater.watchLaterId)
+                }
               >
                 ELIMINAR DE MI LISTA
               </Button>

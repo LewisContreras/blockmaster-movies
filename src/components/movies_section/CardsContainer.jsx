@@ -5,6 +5,7 @@ import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
 import { NothingFound } from "./NothingFound";
 import { CardMovie } from "./CardMovie";
 import { useMoviesToDisplay } from "../../hooks/useMoviesToDisplay";
+import { MOVIE_OPTION_ALL, MOVIE_OPTION_WATCH_LATER } from "../../constants/appConstants";
 function CardsContainer() {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.movies.search);
@@ -16,13 +17,13 @@ function CardsContainer() {
     if (!mounted.current) {
       dispatch(movieSearch(search));
       dispatch(startMovieSelected(search));
-      dispatch(startMovieSelected("Ver después"));
+      dispatch(startMovieSelected(MOVIE_OPTION_WATCH_LATER));
       mounted.current = true;
     }
   }, [dispatch, search]);
 
   const fetchMoreMovies = useCallback(() => {
-    if (search === "Todas") {
+    if (search === MOVIE_OPTION_ALL) {
       dispatch(startMovieSelected(search));
     }
   }, [dispatch, search]);

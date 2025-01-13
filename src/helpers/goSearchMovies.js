@@ -63,7 +63,6 @@ export const getWatchLater = async (uid) => {
   }
 };
 
-
 export const getMostValued = async () => {
   let movies = [];
   await db
@@ -113,4 +112,17 @@ export const addMovie = async (movie) => {
 
 export const updateMovie = async (id, movie) => {
   await db.doc(`movies/${id}`).update(movie);
+};
+
+export const addToWatchLater = async (uid, movieId) => {
+  return await db.collection(`${uid}/movies/verdespues`).add({
+    movieId,
+  });
+};
+
+export const removeFromWatchLater = async (uid, movieId) => {
+  await db
+    .collection(`${uid}/movies/verdespues`)
+    .where("movieId", "==", movieId)
+    .get();
 };

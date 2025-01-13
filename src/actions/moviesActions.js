@@ -1,5 +1,13 @@
 import { types } from "../types/types";
-import { getMovie, getAllMovies, getWatchLater, getMostValued } from "../helpers/goSearchMovies";
+import {
+  getMovie,
+  getAllMovies,
+  getWatchLater,
+  getMostValued,
+  addToWatchLater,
+  removeFromWatchLater,
+} from "../helpers/goSearchMovies";
+import Swal from "sweetalert2";
 
 export const movieSearch = (categorie) => {
   return {
@@ -21,7 +29,7 @@ export const startMovieSelected = (category) => {
       if (watchLater.length) return;
       const movies = await getWatchLater(uid);
       dispatch(movieWatchLater(movies));
-    } else if (category === "Más valoradas"){
+    } else if (category === "Más valoradas") {
       const mostValued = getState().movies.mostValued;
       if (mostValued.length) return;
       const movies = await getMostValued();
@@ -61,30 +69,77 @@ export const movieGetAll = (movies) => {
   };
 };
 
+export const startAddingWatchLater = (movie) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const response = await addToWatchLater(uid, movie.id);
+    response
+      .then((docRef) => {
+        const watchLaterId = docRef.id;
+        dispatch(movieAddWatchLater({ ...movie, watchLaterId }));
+        Swal.fire({
+          icon: "success",
+          title: "!Genial!",
+          text: "La película ha sido agregada a tu lista",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo agregar la película a tu lista",
+        });
+        console.error("Error adding to Watch Later:", err);
+      });
+  };
+};
+
+export const startRemovingWatchLater = (movieId) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    try {
+      await removeFromWatchLater(uid, movieId);
+      dispatch(movieRemoveWatchLater(movieId));
+      Swal.fire({
+        icon: "success",
+        title: "!Genial!",
+        text: "La película ha sido eliminada de tu lista",
+      });
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo eliminar la película de tu lista",
+      });
+      console.error("Error removing from Watch Later:", err);
+    }
+  };
+};
+
 export const movieWatchLater = (movies) => {
   return {
     type: types.mvWatchLater,
     payload: movies,
   };
-}
+};
 
 export const movieMostValued = (movies) => {
   return {
     type: types.mvMostValued,
     payload: movies,
   };
-}
+};
 
 export const movieAddWatchLater = (movie) => {
   return {
     type: types.mvAddWatchLater,
-    payload: movie
-  }
-}
+    payload: movie,
+  };
+};
 
 export const movieRemoveWatchLater = (movie) => {
   return {
     type: types.mvRemoveWatchLater,
-    payload: movie
-  }
-}
+    payload: movie,
+  };
+};

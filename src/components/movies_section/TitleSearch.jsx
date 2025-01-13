@@ -2,6 +2,11 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useMoviesToDisplay } from "../../hooks/useMoviesToDisplay";
+import {
+  MOVIE_OPTION_ALL,
+  MOVIE_OPTION_MOST_VALUED,
+  MOVIE_OPTION_WATCH_LATER,
+} from "../../constants/appConstants";
 
 const TitleSearch = () => {
   const search = useSelector((state) => state.movies.search);
@@ -9,14 +14,13 @@ const TitleSearch = () => {
   let textSearch = "";
   if (search === "" || (!!search && !selected.length)) {
     textSearch = "";
-  } else if (search === "Todas") {
+  } else if (search === MOVIE_OPTION_ALL) {
     textSearch = search + " las películas";
-  } else if (search === "Más valoradas") {
+  } else if (search === MOVIE_OPTION_MOST_VALUED) {
     textSearch = "Películas " + search.toLowerCase();
-  } else if (search === "Ver después") {
+  } else if (search === MOVIE_OPTION_WATCH_LATER) {
     textSearch = "Películas para " + search.toLowerCase();
-  }
-  else {
+  } else {
     textSearch = `"${search}"`;
   }
 
