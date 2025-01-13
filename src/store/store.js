@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import { authReducer } from '../reducers/authReducer';
 import { moviesReducer } from '../reducers/moviesReducer';
-import { registro } from '../reducers/uiReducer';
+import { uiReducer } from '../reducers/uiReducer';
 import {crudReducer}  from "../reducers/crudReducer"
 
 
@@ -10,7 +10,7 @@ import {crudReducer}  from "../reducers/crudReducer"
 
 const reducers = combineReducers({
     auth: authReducer,
-    ui: registro,
+    ui: uiReducer,
     movies: moviesReducer,
     crud: crudReducer
 })

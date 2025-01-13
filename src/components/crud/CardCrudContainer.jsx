@@ -3,16 +3,15 @@ import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { crudSearch } from "../../actions/crudActions";
-import { db } from "../../firebase/firebase-config";
 import { fileUpload } from "../../helpers/fileUpload";
 import Swal from "sweetalert2";
 import { CardCrudPresenter } from "./CardCrudPresenter";
+import { deleteMovie, updateMovie } from "../../helpers/goSearchMovies";
 const CardCrud = ({ movie }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
-    await db.doc(`movies/${movie.id}`).delete();
-
+    await deleteMovie(movie.id);
     Swal.fire({
       icon: "success",
       title: "!Genial¡",
@@ -53,7 +52,7 @@ const CardCrud = ({ movie }) => {
         .required("La duración es obligatoria"),
     }),
     onSubmit: async (values) => {
-      await db.doc(`movies/${movie.id}`).update(values);
+      await updateMovie(movie.id, values);
       Swal.fire({
         icon: "success",
         title: "!Bien!",

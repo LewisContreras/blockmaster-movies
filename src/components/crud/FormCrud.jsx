@@ -1,10 +1,10 @@
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { db } from "../../firebase/firebase-config";
 import { fileUpload } from "../../helpers/fileUpload";
 import Swal from "sweetalert2";
 import { FormCrudPresenter } from "./FormCrudPresenter";
+import { addMovie } from "../../helpers/goSearchMovies";
 
 const FormCrud = () => {
   const formik = useFormik({
@@ -50,7 +50,7 @@ const FormCrud = () => {
     },
     onSubmit: (values) => {
       values.nameMovie = values.nameMovie.toUpperCase();
-      db.collection("movies").add(values);
+      addMovie(values);
       Swal.fire({
         icon: "success",
         title: "!Genial!",

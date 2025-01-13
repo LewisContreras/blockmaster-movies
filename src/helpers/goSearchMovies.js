@@ -102,3 +102,15 @@ export const getMovie = async (category) => {
 
   return movies;
 };
+
+export const deleteMovie = async (id) => {
+  await db.doc(`movies/${id}`).delete();
+};
+
+export const addMovie = async (movie) => {
+  await db.collection("movies").add(movie);
+};
+
+export const updateMovie = async (id, movie) => {
+  await db.doc(`movies/${id}`).update(movie);
+};

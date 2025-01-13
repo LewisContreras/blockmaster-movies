@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
+import { startGoogleLogin, startLoginEmailPassword } from "../../actions/authActions";
 import { FaGoogle } from "react-icons/fa";
 import { Icon } from "@chakra-ui/react";
 import { FormikInput } from "../common/FormikInput";

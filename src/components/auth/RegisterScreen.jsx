@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { startRegisterWithEmailPasswordName } from "../../actions/auth";
+import { startRegisterWithEmailPasswordName } from "../../actions/authActions";
 import "../../styles/animations.css";
 import { FormikInput } from "../common/FormikInput";
 

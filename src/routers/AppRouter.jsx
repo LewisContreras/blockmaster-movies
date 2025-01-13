@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-import { login } from "../actions/auth";
+import { login } from "../actions/authActions";
 import { AuthRouter } from "./AuthRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { PrivateRoute } from "./PrivateRoute";
