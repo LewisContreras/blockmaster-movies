@@ -35,23 +35,30 @@ export const getAllMovies = async (selected, last) => {
 export const getWatchLater = async (uid) => {
   try {
     const snapshot = await db.collection(`${uid}/movies/verdespues`).get();
-    const movieIds = snapshot.docs.map((doc) => doc.data().movieId);
+    const watchLater = snapshot.docs.map((doc) => ({
+      watchLaterId: doc.id,
+      movieId: doc.data().movieId,
+    }));
 
-    if (movieIds.length === 0) return [];
-
+    if (watchLater.length === 0) return [];
+    const movieIds = watchLater.map((item) => item.movieId);
     const moviesSnapshot = await db
       .collection("movies")
       .where(firebase.firestore.FieldPath.documentId(), "in", movieIds)
       .get();
 
-    const movies = moviesSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const movies = moviesSnapshot.docs.map((doc) => {
+      const match = watchLater.find((item) => item.movieId === doc.id);
+      return {
+        id: doc.id,
+        watchLaterId: match?.watchLaterId,
+        ...doc.data(),
+      };
+    });
 
     return movies;
   } catch (err) {
-    console.error("Error fetching 'Ver despues' movies:", err);
+    console.error("Error fetching 'Ver después' movies:", err);
     return [];
   }
 };

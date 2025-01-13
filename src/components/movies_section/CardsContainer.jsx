@@ -16,6 +16,7 @@ function CardsContainer() {
     if (!mounted.current) {
       dispatch(movieSearch(search));
       dispatch(startMovieSelected(search));
+      dispatch(startMovieSelected("Ver después"));
       mounted.current = true;
     }
   }, [dispatch, search]);

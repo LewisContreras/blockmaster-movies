@@ -3,7 +3,7 @@ import Icon from "@chakra-ui/icon";
 import { Img } from "@chakra-ui/image";
 import { Flex, HStack, Text, VStack, Box } from "@chakra-ui/layout";
 import React from "react";
-import { FaPlay, FaPlus } from "react-icons/fa";
+import { FaPlay, FaPlus, FaTrash } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { movieModal } from "../../actions/moviesActions";
@@ -27,6 +27,27 @@ function ModalEachMovie() {
   };
 
   const isInWatchLater = watchLater.some((movie) => movie.id === modal?.id);
+
+  const handleRemoveFromWatchLater = (docId) => {
+    db.collection(`${uid}/movies/verdespues`)
+      .doc(docId)
+      .delete()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "!Genial!",
+          text: "La película ha sido eliminada de tu lista",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo eliminar la película de tu lista",
+        });
+        console.error("Error removing from Watch Later:", err);
+      });
+  };
 
   return !modal ? (
     <Box display="none"></Box>
@@ -85,7 +106,18 @@ function ModalEachMovie() {
             >
               VER AHORA
             </Button>
-            {!isInWatchLater && (
+            {isInWatchLater ? (
+              <Button
+                leftIcon={<FaTrash />}
+                border="2px solid"
+                borderColor="red"
+                color="red"
+                bgColor="brand.background"
+                onClick={() => handleRemoveFromWatchLater(modal.watchLaterId)}
+              >
+                ELIMINAR DE MI LISTA
+              </Button>
+            ) : (
               <Button
                 leftIcon={<FaPlus />}
                 border="2px solid"
