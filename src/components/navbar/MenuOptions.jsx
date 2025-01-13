@@ -2,8 +2,17 @@ import React from "react";
 import { HStack, Text } from "@chakra-ui/layout";
 import { useDispatch } from "react-redux";
 import { movieSearch, startMovieSelected } from "../../actions/moviesActions";
+import {
+  MOVIE_OPTION_ALL,
+  MOVIE_OPTION_MOST_VALUED,
+  MOVIE_OPTION_WATCH_LATER,
+} from "../../constants/appConstants";
 
-const menuOptionsList = ["Todas", "Más valoradas", "Ver después"];
+const menuOptionsList = [
+  MOVIE_OPTION_ALL,
+  MOVIE_OPTION_MOST_VALUED,
+  MOVIE_OPTION_WATCH_LATER,
+];
 
 const MenuOptions = () => {
   const dispatch = useDispatch();

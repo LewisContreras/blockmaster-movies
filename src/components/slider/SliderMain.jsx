@@ -9,6 +9,7 @@ import { FaPlay, FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { movieTrailer } from "../../actions/moviesActions";
 import { sliderImages } from "../../localData/sliderImages";
+import { MOVIE_OPTION_WATCH_LATER } from "../../constants/appConstants";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -55,7 +56,7 @@ function SliderMain() {
                   color="brand.primary"
                   bgColor="brand.background"
                 >
-                  VER DESPUÉS
+                  {MOVIE_OPTION_WATCH_LATER.toUpperCase()}
                 </Button>
               </HStack>
             </Box>
