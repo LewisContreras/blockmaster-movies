@@ -11,6 +11,8 @@ export const types = {
     mvSelected: "[MV] movie selected",
     mvGetAll: "[MV] get all movies",
     mvWatchLater: "[MV] movie to watch later",
+    mvAddWatchLater: "[MV] movie to add watch later",
+    mvRemoveWatchLater: "[MV] movie to remove watch later",
     mvMostValued: "[MV] movie most valued",
     mvSearch: "[MV] movie to search",
     mvModal: "[MV] movie modal",

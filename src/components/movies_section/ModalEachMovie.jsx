@@ -6,7 +6,7 @@ import React from "react";
 import { FaPlay, FaPlus, FaTrash } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { movieModal } from "../../actions/moviesActions";
+import { movieModal, movieRemoveWatchLater, movieAddWatchLater } from "../../actions/moviesActions";
 import { db } from "../../firebase/firebase-config";
 import "../../styles/animations.css";
 import Swal from "sweetalert2";
@@ -18,21 +18,36 @@ function ModalEachMovie() {
   const dispatch = useDispatch();
 
   const handleSeeAfter = (movie) => {
-    db.collection(`${uid}/movies/verdespues`).add({ movieId: movie.id });
-    Swal.fire({
-      icon: "success",
-      title: "!Genial!",
-      text: "La película ha sido agregada a tu lista",
-    });
+    db.collection(`${uid}/movies/verdespues`)
+      .add({ movieId: movie.id })
+      .then((docRef) => {
+        const watchLaterId = docRef.id;
+        dispatch(movieAddWatchLater({ ...movie, watchLaterId }));
+        Swal.fire({
+          icon: "success",
+          title: "!Genial!",
+          text: "La película ha sido agregada a tu lista",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo agregar la película a tu lista",
+        });
+        console.error("Error adding to Watch Later:", err);
+      });
   };
+  
 
-  const isInWatchLater = watchLater.some((movie) => movie.id === modal?.id);
+  const isInWatchLater = watchLater.find((movie) => movie.id === modal?.id);
 
   const handleRemoveFromWatchLater = (docId) => {
     db.collection(`${uid}/movies/verdespues`)
       .doc(docId)
       .delete()
       .then(() => {
+        dispatch(movieRemoveWatchLater(docId));
         Swal.fire({
           icon: "success",
           title: "!Genial!",
@@ -106,14 +121,14 @@ function ModalEachMovie() {
             >
               VER AHORA
             </Button>
-            {isInWatchLater ? (
+            {!!isInWatchLater ? (
               <Button
                 leftIcon={<FaTrash />}
                 border="2px solid"
                 borderColor="red"
                 color="red"
                 bgColor="brand.background"
-                onClick={() => handleRemoveFromWatchLater(modal.watchLaterId)}
+                onClick={() => handleRemoveFromWatchLater(isInWatchLater.watchLaterId)}
               >
                 ELIMINAR DE MI LISTA
               </Button>

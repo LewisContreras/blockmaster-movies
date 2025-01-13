@@ -74,3 +74,17 @@ export const movieMostValued = (movies) => {
     payload: movies,
   };
 }
+
+export const movieAddWatchLater = (movie) => {
+  return {
+    type: types.mvAddWatchLater,
+    payload: movie
+  }
+}
+
+export const movieRemoveWatchLater = (movie) => {
+  return {
+    type: types.mvRemoveWatchLater,
+    payload: movie
+  }
+}
