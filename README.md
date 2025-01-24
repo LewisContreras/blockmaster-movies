@@ -1,58 +1,75 @@
 # Blockmaster
 
-Revive una tienda icónica para rentar películas, regresa con una nueva plataforma de streaming.
+Revive an iconic movie rental store with a modern twist—Blockmaster returns as a streaming platform!
 
-Aplicación hecha con ReactJS + Redux y un backend como servicio haciendo uso de firebase.
-Como marco de trabajo se hizo uso de Chakra UI.
+This application is built using **ReactJS + Redux** and utilizes Firebase as a backend-as-a-service. The UI is designed with **Chakra UI**.
 
-[Aquí](https://lewiscontreras.github.io/blockmaster-movies/) puedes ver el despliegue.
+You can check out the live deployment [here](https://lewiscontreras.github.io/blockmaster-movies/).
 
+## Requirements
 
-## Requerimientos 
---------
+Ensure you have **Node.js v12** and **npm** installed to run this project without compatibility issues.
 
-Debes tener node.js y npm para poder hacer la instalación.
+## How to Get Started
 
+### Clone the Project
 
-## Clonar proyecto
---------
-
-Debes usar el siguiente comando en tu consola para clonar el proyecto:
+Use the following command to clone the repository:
 
 ```bash
 $ git clone https://github.com/LewisContreras/blockmaster-movies.git
 ```
 
-una vez clonado el proyecto, debes ingresar a la carpeta en que este fue clonado.
+Once cloned, navigate to the project directory:
 
-## Instalar dependencias
-
-Para instalar las dependencias usa el siguiiente comando:
-
-```
-$ npm i
+```bash
+$ cd blockmaster-movies
 ```
 
-Para correr el proyecto en un servidor local usa el siguiente comando:
+### Install Dependencies
 
+Run the following command to install the necessary dependencies:
+
+```bash
+$ npm install
 ```
+
+### Start the Project
+
+To start the project in a local development server, use:
+
+```bash
 $ npm start
 ```
 
-## Vistas
-------------------------
+## Features
+
+- **Authentication**: Login is implemented using Firebase Authentication.
+- **Form Handling**: Forms are managed with **Formik** and validated using **Yup**.
+- **Infinite Scrolling**: The application uses an observer to load movies progressively, avoiding large fetches.
+- **Admin Module**: Includes functionality for administrators to create, edit, update, and delete movies.
+- **State Management**: Data is fetched only once from the Firebase database and is locally cached to minimize unnecessary API calls.
+- **Watchlist**: Users can save movies to a "watch later" list.
+
+## Project Views
 
 ### Mobile
 
-
-![image](https://i.imgur.com/rwfsmdJ.png)
-![image](https://i.imgur.com/oyit5XV.png)
+![Mobile View 1](https://i.imgur.com/rwfsmdJ.png)
+![Mobile View 2](https://i.imgur.com/oyit5XV.png)
 
 ### Desktop
 
+![Desktop View 1](https://i.imgur.com/jvChYsG.png)
 
-![image](https://i.imgur.com/jvChYsG.png)
+## Notes
 
+- The project is designed to run on **Node.js v12**. Using other versions might cause unexpected issues.
+- Ensure you have a Firebase project set up with the appropriate configurations to run the application.
+
+---
+
+Feel free to contribute or report any issues by opening a ticket in the repository!
 
 
 
